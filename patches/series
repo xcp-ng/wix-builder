@@ -1,0 +1,3 @@
+# This series applies on Git commit b3f340393117094a75ea8ced77f2357e4aa095e7
+disable-warnaserror.patch
+disable-tests.patch
