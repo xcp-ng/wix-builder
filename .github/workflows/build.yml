@@ -41,13 +41,18 @@ jobs:
         run: ./src/build_official.cmd
         env:
           RuntimeTestsEnabled: false
+      - name: Add SBOM tool
+        run: |
+          New-Item -Type Directory -Path $Env:RUNNER_TEMP/tools/
+          Invoke-WebRequest -Uri https://github.com/microsoft/sbom-tool/releases/download/v4.1.4/sbom-tool-win-x64.exe -OutFile $Env:RUNNER_TEMP\tools\sbom.exe
+          if ((Get-FileHash $Env:RUNNER_TEMP\tools\sbom.exe -Algorithm SHA256).Hash -ine "9ba208cbec21c93b6d1ba01f50681a47d9d14d302f59b33e505b220b89aa0363") {
+            throw "sbom-tool failed verification"
+          }
       - name: Generate SBOM
         run: |
-          $ErrorActionPreference = 'Stop'
-          Invoke-WebRequest -Uri "https://github.com/microsoft/sbom-tool/releases/latest/download/sbom-tool-win-x64.exe" -OutFile "$Env:RUNNER_TEMP/sbom-tool.exe"
-          & "$Env:RUNNER_TEMP/sbom-tool.exe" generate -b build/artifacts/ -bc . -pn wix -ps ${{ env.VENDOR_NAME }} -pv ${{ env.WIX_VERSION }}
+          & "$Env:RUNNER_TEMP/tools/sbom.exe" generate -b build/artifacts/ -bc . -pn wix -ps ${{ env.VENDOR_NAME }} -pv ${{ env.WIX_VERSION }}
           if ($LASTEXITCODE -ne 0) {
-            throw "sbom-tool failed"
+            throw "sbom-tool failed with exit code $LASTEXITCODE"
           }
       - name: Save build
         id: upload
@@ -55,6 +60,9 @@ jobs:
         with:
           name: wix
           path: build/artifacts/
+    outputs:
+      subject-name: artifacts
+      subject-digest: sha256:${{steps.upload.outputs.artifact-digest}}
 
   attest:
     runs-on: ubuntu-latest
@@ -64,12 +72,8 @@ jobs:
       contents: read
       attestations: write
     steps:
-      - name: Download packages
-        uses: actions/download-artifact@v5
-        with:
-          name: wix
-          path: build/artifacts/
       - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v2
         with:
-          subject-path: build/artifacts/**/*.nupkg
+          subject-name: ${{needs.build.outputs.subject-name}}
+          subject-digest: ${{needs.build.outputs.subject-digest}}
