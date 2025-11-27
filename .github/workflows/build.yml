@@ -10,7 +10,8 @@ env:
   NUGET_XMLDOC_MODE: skip
   VENDOR_NAME: XCP-ng
   WIX_REPO: xcp-ng/wix
-  WIX_REF: v6.0.2-xcpng.0
+  WIX_REVISION: b3f340393117094a75ea8ced77f2357e4aa095e7
+  WIX_VERSION: v6.0.2-xcpng.1
 
 jobs:
   build:
@@ -22,16 +23,19 @@ jobs:
       WixOfficialBuild: ${{ github.repository_owner == 'wixtoolset' && startsWith(github.ref, 'refs/tags/v') }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           repository: ${{ env.WIX_REPO }}
-          ref: ${{ env.WIX_REF }}
+          ref: ${{ env.WIX_REVISION }}
+          fetch-tags: false
       - name: Checkout patches
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           path: wix-builder
       - name: Apply patches
         run: ./wix-builder/Apply-WixPatches.ps1
+      - name: Reset version
+        run: git tag $(WIX_VERSION)
       - name: Build wix
         shell: cmd
         run: ./src/build_official.cmd
@@ -41,7 +45,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           Invoke-WebRequest -Uri "https://github.com/microsoft/sbom-tool/releases/latest/download/sbom-tool-win-x64.exe" -OutFile "$Env:RUNNER_TEMP/sbom-tool.exe"
-          & "$Env:RUNNER_TEMP/sbom-tool.exe" generate -b build/artifacts/ -bc . -pn wix -ps ${{ env.VENDOR_NAME }} -pv ${{ env.WIX_REF }}
+          & "$Env:RUNNER_TEMP/sbom-tool.exe" generate -b build/artifacts/ -bc . -pn wix -ps ${{ env.VENDOR_NAME }} -pv ${{ env.WIX_VERSION }}
           if ($LASTEXITCODE -ne 0) {
             throw "sbom-tool failed"
           }
