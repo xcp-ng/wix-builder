@@ -1,7 +1,7 @@
 From 86fe1379e75d60c8058fcdc0d0917e7ccaa4a97f Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Sat, 7 Mar 2026 16:49:15 +0100
-Subject: [PATCH 3/5] Restore projects via msbuild
+Subject: [PATCH 3/4] Restore projects via msbuild
 
 Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
 ---

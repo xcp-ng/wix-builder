@@ -1,7 +1,7 @@
 From 639c76b5680dc12c8db8e17beb734cfa31bdcb38 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Sat, 7 Mar 2026 16:48:51 +0100
-Subject: [PATCH 2/5] Build projects previously implied by tests
+Subject: [PATCH 2/4] Build projects previously implied by tests
 
 Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
 ---

@@ -1,7 +1,7 @@
 From 8afd7aad9a10669d48a5b23f722909668f7fdcd1 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Wed, 26 Nov 2025 13:06:59 +0100
-Subject: [PATCH 1/5] Disable tests
+Subject: [PATCH 1/4] Disable tests
 
 ---
  src/api/api.cmd   |  8 --------
