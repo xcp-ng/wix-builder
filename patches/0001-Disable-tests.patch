@@ -1,23 +1,23 @@
-Disable tests
-
+From 8afd7aad9a10669d48a5b23f722909668f7fdcd1 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
-
+Date: Wed, 26 Nov 2025 13:06:59 +0100
+Subject: [PATCH 1/5] Disable tests
 
 ---
- src/api/api.cmd   |    8 --------
- src/build_all.cmd |    5 -----
- src/burn/burn.cmd |    5 -----
- src/libs/libs.cmd |    6 ------
- src/wix/wix.cmd   |   13 -------------
+ src/api/api.cmd   |  8 --------
+ src/build_all.cmd |  5 -----
+ src/burn/burn.cmd |  5 -----
+ src/libs/libs.cmd |  6 ------
+ src/wix/wix.cmd   | 13 -------------
  5 files changed, 37 deletions(-)
 
 diff --git a/src/api/api.cmd b/src/api/api.cmd
-index 290108d0..64cca71c 100644
+index cae0cf5a..113a10c1 100644
 --- a/src/api/api.cmd
 +++ b/src/api/api.cmd
 @@ -25,14 +25,6 @@
  
- msbuild api_t.proj -p:Configuration=%_C% -tl -nologo -bl:%_L%\api_build.binlog || exit /b
+ msbuild api_t.proj -p:Configuration=%_C% -tl -nologo -warnaserror -bl:%_L%\api_build.binlog || exit /b
  
 -:: Test
 -dotnet test ^
@@ -47,12 +47,12 @@ index 5f3ba14e..96b6284c 100644
  
  call internal\finalize.cmd %_C% || exit /b
 diff --git a/src/burn/burn.cmd b/src/burn/burn.cmd
-index 89e44422..6e2852db 100644
+index 059c948c..daed54ed 100644
 --- a/src/burn/burn.cmd
 +++ b/src/burn/burn.cmd
 @@ -25,11 +25,6 @@ nuget restore || exit /b
  
- msbuild burn_t.proj -p:Configuration=%_C% -tl -nologo -m -bl:%_L%\burn_build.binlog || exit /b
+ msbuild burn_t.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\burn_build.binlog || exit /b
  
 -dotnet test ^
 - %_B%\x86\BurnUnitTest.dll ^
@@ -63,12 +63,12 @@ index 89e44422..6e2852db 100644
  
  :clean
 diff --git a/src/libs/libs.cmd b/src/libs/libs.cmd
-index e3c1a5fa..2ef93b4b 100644
+index d8b81f54..ee297826 100644
 --- a/src/libs/libs.cmd
 +++ b/src/libs/libs.cmd
 @@ -21,12 +21,6 @@
  
- msbuild -Restore libs_t.proj -p:Configuration=%_C% -tl -nologo -m -bl:%_L%\libs_build.binlog || exit /b
+ msbuild -Restore libs_t.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\libs_build.binlog || exit /b
  
 -dotnet test ^
 - %_B%\net6.0\WixToolsetTest.Versioning.dll ^
@@ -80,14 +80,14 @@ index e3c1a5fa..2ef93b4b 100644
  
  :clean
 diff --git a/src/wix/wix.cmd b/src/wix/wix.cmd
-index dc06558c..87b7da6c 100644
+index 68e13cd1..4a6fc39f 100644
 --- a/src/wix/wix.cmd
 +++ b/src/wix/wix.cmd
-@@ -35,19 +35,6 @@ msbuild -t:Publish -p:Configuration=%_C% -tl -nologo WixToolset.Sdk\WixToolset.S
+@@ -35,19 +35,6 @@ msbuild -t:Publish -p:Configuration=%_C% -tl -nologo -warnaserror WixToolset.Sdk
  :: TODO - used by MsbuildFixture.ReportsInnerExceptionForUnexpectedExceptions test
  :: msbuild -t:Publish -Restore -p:Configuration=%_C% -p:TargetFramework=net472 -p:RuntimeIdentifier=linux-x86 -p:PublishDir=%_P%WixToolset.Sdk\broken\net472\ wix\wix.csproj || exit /b
  
--msbuild -t:Test test\WixToolsetTest.Sdk\WixToolsetTest.Sdk.csproj -p:Configuration=%_C% -tl -nologo  || exit /b
+-msbuild -t:Test test\WixToolsetTest.Sdk\WixToolsetTest.Sdk.csproj -p:Configuration=%_C% -tl -nologo -warnaserror  || exit /b
 -
 -:: Test
 -dotnet test ^
@@ -101,5 +101,5 @@ index dc06558c..87b7da6c 100644
 -
 -
  :: Pack
- msbuild pack_t.proj -p:Configuration=%_C% -tl -nologo -m -bl:%_L%\wix_pack.binlog || exit /b
+ msbuild pack_t.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\wix_pack.binlog || exit /b
  

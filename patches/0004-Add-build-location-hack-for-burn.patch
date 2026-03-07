@@ -1,0 +1,25 @@
+From 8228c9b0e312b64ee2aad90bb137888aebc5760c Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Sat, 7 Mar 2026 16:57:21 +0100
+Subject: [PATCH 4/5] Add build location hack for burn
+
+Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
+---
+ src/burn/Directory.Build.props | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/burn/Directory.Build.props b/src/burn/Directory.Build.props
+index 6050781d..40e24661 100644
+--- a/src/burn/Directory.Build.props
++++ b/src/burn/Directory.Build.props
+@@ -7,8 +7,8 @@
+   </PropertyGroup>
+ 
+   <Import Project="..\Directory.Build.props" />
+-  
++
+   <PropertyGroup>
+-    <BurnGeneratedHeaderDirectory>$(BaseIntermediateOutputPath)..\</BurnGeneratedHeaderDirectory>
++    <BurnGeneratedHeaderDirectory>$(RootBuildFolder)$(SegmentName)\obj\$(Configuration)\$(PlatformFolder)\</BurnGeneratedHeaderDirectory>
+   </PropertyGroup>
+ </Project>

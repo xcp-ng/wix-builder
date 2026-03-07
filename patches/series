@@ -1,3 +1,5 @@
-# This series applies on Git commit b3f340393117094a75ea8ced77f2357e4aa095e7
-disable-warnaserror.patch
-disable-tests.patch
+0001-Disable-tests.patch
+0002-Build-projects-previously-implied-by-tests.patch
+0003-Restore-projects-via-msbuild.patch
+0004-Add-build-location-hack-for-burn.patch
+0005-Add-neutralization-script.patch
