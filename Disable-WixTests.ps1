@@ -6,9 +6,9 @@
     This script performs the following actions:
     1. Prunes test ProjectReferences from all Traversal (_t.proj) files.
     2. Prunes test projects from all Visual Studio Solution (.sln) files.
-    3. Renames packages.config to packages.config.disabled in test directories to block NuGet downloads.
+    3. Deletes packages.config in test directories to block NuGet downloads.
     4. Removes -warnaserror from all build command (.cmd) files.
-    5. Modernizes internal.cmd and burn.cmd to use msbuild -t:Restore.
+    5. Ensure Extension Builds in Traversal Projects.
 #>
 
 $ErrorActionPreference = "Stop"
@@ -18,29 +18,26 @@ $SrcDir = Join-Path $RootDir.FullName "src"
 Write-Host "--- NEUTERING TESTS FOR PRODUCTION BUILD ---" -ForegroundColor Cyan
 
 # 1. Prune Traversal (_t.proj) files
-Write-Host "[1/6] Pruning Traversal projects..." -ForegroundColor Yellow
+Write-Host "[1/5] Pruning Traversal projects..." -ForegroundColor Yellow
 $traversalFiles = Get-ChildItem -Path $SrcDir -Filter "*_t.proj" -Recurse
 foreach ($file in $traversalFiles) {
-    $content = Get-Content $file.FullName -Raw
-    # Remove lines containing <ProjectReference... that match "test" case-insensitively
-    $newContent = $content -replace '(?m)^\s*<ProjectReference Include=".*?test.*?".*?/>\s*$', ""
-    if ($content -ne $newContent) {
-        Set-Content $file.FullName $newContent
-        Write-Host "  - Pruned: $($file.FullName.Replace($SrcDir, ''))" -ForegroundColor Gray
+    $newContent = Get-Content $file.FullName | Where-Object {
+        $_ -notmatch '<ProjectReference Include=".*?test.*?".*?/>'
     }
+    Set-Content $file.FullName $newContent
+    Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
 }
 
 # 2. Prune Solution (.sln) files
-Write-Host "[2/6] Pruning Solution files..." -ForegroundColor Yellow
+Write-Host "[2/5] Pruning Solution files..." -ForegroundColor Yellow
 $slnFiles = Get-ChildItem -Path $SrcDir -Filter "*.sln" -Recurse
 foreach ($file in $slnFiles) {
-    $content = Get-Content $file.FullName
     $prunedGuids = [System.Collections.Generic.HashSet[string]]::new()
 
     # Pass 1: Identify projects to remove and capture GUIDs
     $filteredMetadata = @()
     $skipping = $false
-    foreach ($line in $content) {
+    foreach ($line in Get-Content $file.FullName) {
         if ($line -match 'Project\s*\(".*?"\)\s*=\s*".*?",\s*".*?",\s*"(.*?)"') {
             $guid = $Matches[1]
             if ($line -match 'test') {
@@ -57,72 +54,50 @@ foreach ($file in $slnFiles) {
     }
 
     # Pass 2: Clean up dangling GUID references (Metadata/Nesting/BuildConfigs)
-    if ($prunedGuids.Count -gt 0) {
-        $finalContent = @()
-        foreach ($line in $filteredMetadata) {
-            $matched = $false
-            foreach ($guid in $prunedGuids) {
-                if ($line.Contains($guid)) {
-                    $matched = $true
-                    break
-                }
+    $finalContent = $filteredMetadata | Where-Object {
+        $line = $_
+        $matched = $false
+        foreach ($guid in $prunedGuids) {
+            if ($line.Contains($guid)) {
+                $matched = $true
+                break
             }
-            if (-not $matched) { $finalContent += $line }
         }
-        Set-Content $file.FullName $finalContent
-        Write-Host "  - Pruned $($prunedGuids.Count) test projects from: $($file.FullName.Replace($SrcDir, ''))" -ForegroundColor Gray
+        return (-not $matched)
     }
+    Set-Content $file.FullName $finalContent
+    Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
 }
 
 # 3. Disable packages.config in test directories
-Write-Host "[3/6] Disabling test packages.config..." -ForegroundColor Yellow
+Write-Host "[3/5] Deleting test packages.config..." -ForegroundColor Yellow
 $packageConfigs = Get-ChildItem -Path $SrcDir -Filter "packages.config" -Recurse
 foreach ($file in $packageConfigs) {
     if ($file.FullName -match "test") {
-        $newName = $file.FullName + ".disabled"
-        if (Test-Path $newName) { Remove-Item $newName }
-        Move-Item $file.FullName $newName
-        Write-Host "  - Disabled: $($file.FullName.Replace($SrcDir, ''))" -ForegroundColor Gray
+        Remove-Item $file.FullName
+        Write-Host "  - Deleted: $($file.FullName)" -ForegroundColor Gray
     }
 }
 
 # 4. Remove -warnaserror from .cmd files
-Write-Host "[4/6] Removing -warnaserror from scripts..." -ForegroundColor Yellow
+Write-Host "[4/5] Removing -warnaserror from scripts..." -ForegroundColor Yellow
 $cmdFiles = Get-ChildItem -Path $RootDir -Filter "*.cmd" -Recurse
 foreach ($file in $cmdFiles) {
-    $content = Get-Content $file.FullName -Raw
-    $newContent = $content -replace '-warnaserror\s*', ""
-    if ($content -ne $newContent) {
-        Set-Content $file.FullName $newContent
-        Write-Host "  - Updated: $($file.FullName.Replace($RootDir.FullName, ''))" -ForegroundColor Gray
+    $newContent = Get-Content $file.FullName | ForEach-Object {
+        $_ -replace '-warnaserror\s*', ""
     }
+    Set-Content $file.FullName $newContent
+    Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
 }
 
-# 5. Modernize CMD Restore logic
-Write-Host "[5/6] Modernizing Restore logic..." -ForegroundColor Yellow
-$targetCmds = @("src\internal\internal.cmd", "src\burn\burn.cmd")
-foreach ($relPath in $targetCmds) {
-    $filePath = Join-Path $RootDir.FullName $relPath
-    if (Test-Path $filePath) {
-        $content = Get-Content $filePath -Raw
-        if ($content -match "nuget restore") {
-            $newContent = $content -replace "nuget restore", "msbuild -t:Restore"
-            Set-Content $filePath $newContent
-            Write-Host "  - Modernized: $relPath" -ForegroundColor Gray
-        }
-    }
-}
-
-# 6. Ensure Extension Builds in Traversal Projects
-Write-Host "[6/6] Ensuring Extension builds..." -ForegroundColor Yellow
+# 5. Ensure Extension Builds in Traversal Projects
+Write-Host "[5/5] Ensuring Extension builds..." -ForegroundColor Yellow
 $extTraversalFiles = Get-ChildItem -Path (Join-Path $SrcDir "ext") -Filter "*_t.proj" -Recurse
 foreach ($file in $extTraversalFiles) {
-    $content = Get-Content $file.FullName -Raw
-    $lines = $content -split "`r?`n"
+    $content = Get-Content $file.FullName
     $newLines = @()
-    $changed = $false
 
-    foreach ($line in $lines) {
+    foreach ($line in $content) {
         # Match ProjectReference with at least Include and either Targets="Pack" or NoBuild
         if ($line -match '<ProjectReference\s+Include="([^"]+\.csproj)"(.*)/>') {
             $csprojPath = $Matches[1]
@@ -137,7 +112,6 @@ foreach ($file in $extTraversalFiles) {
                     $buildRef = $line -replace 'Targets="Pack"', '' -replace 'Properties="NoBuild=true"', '' -replace '\s{2,}', ' ' -replace '\s+/>', ' />'
                     if ($buildRef -ne $line) {
                         $newLines += $buildRef
-                        $changed = $true
                     }
                 }
             }
@@ -145,10 +119,8 @@ foreach ($file in $extTraversalFiles) {
         $newLines += $line
     }
 
-    if ($changed) {
-        Set-Content $file.FullName ($newLines -join "`r`n")
-        Write-Host "  - Restored build for extensions in: $($file.FullName.Replace($SrcDir, ''))" -ForegroundColor Gray
-    }
+    Set-Content $file.FullName $newLines
+    Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
 }
 
 Write-Host "--- NEUTERING COMPLETE ---" -ForegroundColor Green
