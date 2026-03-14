@@ -57,7 +57,7 @@ jobs:
           }
       - name: Save build
         id: upload
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: wix
           path: build/artifacts/
@@ -74,7 +74,7 @@ jobs:
       attestations: write
     steps:
       - name: Generate artifact attestation
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ${{needs.build.outputs.subject-name}}
           subject-digest: ${{needs.build.outputs.subject-digest}}
