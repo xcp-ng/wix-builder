@@ -1,4 +1,4 @@
-From 4b5e53fa279b509467c54ae63c49c4bc1e3150bb Mon Sep 17 00:00:00 2001
+From 224b45abb80afde27103b28a6adbc6c561381cea Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Sat, 7 Mar 2026 16:49:15 +0100
 Subject: [PATCH] Restore projects via msbuild

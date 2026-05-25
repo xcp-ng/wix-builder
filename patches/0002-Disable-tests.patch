@@ -1,4 +1,4 @@
-From bfa73f935fcbf56e7a5d139e809f0f77ea19b9ea Mon Sep 17 00:00:00 2001
+From e395535da25f050001fe16744230532a70ba97b1 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Wed, 26 Nov 2025 13:06:59 +0100
 Subject: [PATCH] Disable tests

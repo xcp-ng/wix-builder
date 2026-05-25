@@ -1,7 +1,7 @@
-From 79575433a146f9f4b6ddd0d89c10ec1d357a59c6 Mon Sep 17 00:00:00 2001
+From bae83b19e8354f2afebea64fedb7b2cf1bc7c2ab Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Mon, 25 May 2026 23:49:23 +0200
-Subject: [PATCH] Delete OSMF EULA references
+Subject: [PATCH] Delete OSMF EULA references and checks
 
 Our binaries are redistributed under the MS-RL terms and not subject to
 the OSMF EULA. It also lets us set requireLicenseAcceptance to false.
@@ -15,13 +15,15 @@ Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
  .../WixToolset.Dtf.CustomAction.nuspec        |   2 +-
  .../WixToolset.Bal.wixext.nuspec              |   2 +-
  src/ext/Bal/wixstdfn/wixstdfn.nuspec          |   2 +-
+ .../targets/CheckLicenseAcceptance.targets    |  24 -------
  src/libs/dutil/WixToolset.DUtil/dutil.nuspec  |   2 +-
  .../wcautil/WixToolset.WcaUtil/wcautil.nuspec |   2 +-
  src/setup/OSMFEULA.rtf                        | Bin 3835 -> 499 bytes
  .../WixToolset.Core.Native.nuspec             |   2 +-
  src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec  |   2 +-
+ src/wix/WixToolset.Sdk/tools/wix.targets      |  18 -----
  src/wix/pack-wix/pack-wix.nuspec              |   2 +-
- 13 files changed, 13 insertions(+), 75 deletions(-)
+ 15 files changed, 13 insertions(+), 117 deletions(-)
 
 diff --git a/OSMFEULA.txt b/OSMFEULA.txt
 index ead58aa2..05abe5a1 100644
@@ -172,6 +174,39 @@ index b125ff7c..29a3e91a 100644
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/internal/targets/CheckLicenseAcceptance.targets b/src/internal/targets/CheckLicenseAcceptance.targets
+index 61155827..405fb0c9 100644
+--- a/src/internal/targets/CheckLicenseAcceptance.targets
++++ b/src/internal/targets/CheckLicenseAcceptance.targets
+@@ -3,28 +3,4 @@
+ 
+ <Project>
+ 
+-  <Target
+-    Name="CheckWix7LicenseAcceptance"
+-    BeforeTargets="CoreCompile">
+-
+-    <ItemGroup>
+-      <_AcceptEula Include="$(AcceptEula)" />
+-    </ItemGroup>
+-
+-    <PropertyGroup>
+-      <_Wix7EulaFile>$(USERPROFILE)\.wix\wix7-osmf-eula.txt</_Wix7EulaFile>
+-    </PropertyGroup>
+-
+-    <FindInList List="@(_AcceptEula)" ItemSpecToFind="wix7">
+-      <Output TaskParameter="ItemFound" ItemName="_Wix7LicenseAccepted" />
+-    </FindInList>
+-
+-    <Error
+-      Text="You must accept the Open Source Maintenance Fee (OSMF) EULA to use WiX Toolset v7. For instructions, see https://wixtoolset.org/osmf/"
+-      Code="WIX7015"
+-      File="$(MSBuildProjectFile)"
+-      HelpLink="https://wixtoolset.org/osmf"
+-      Condition=" '@(_Wix7LicenseAccepted)' == '' and !Exists('$(_Wix7EulaFile)')" />
+-  </Target>
+-
+ </Project>
 diff --git a/src/libs/dutil/WixToolset.DUtil/dutil.nuspec b/src/libs/dutil/WixToolset.DUtil/dutil.nuspec
 index eb3833a5..1643771d 100644
 --- a/src/libs/dutil/WixToolset.DUtil/dutil.nuspec
@@ -271,6 +306,42 @@ index b59415a9..cb1f6070 100644
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/wix/WixToolset.Sdk/tools/wix.targets b/src/wix/WixToolset.Sdk/tools/wix.targets
+index 88317edc..3b8cb252 100644
+--- a/src/wix/WixToolset.Sdk/tools/wix.targets
++++ b/src/wix/WixToolset.Sdk/tools/wix.targets
+@@ -205,23 +205,6 @@
+         ToolPath="$(WixToolDir)" />
+   </Target>
+ 
+-  <Target
+-    Name="CheckLicenseAcceptance"
+-    BeforeTargets="CoreCompile"
+-    Condition=" '$(AcceptEula)' == '' ">
+-
+-    <PropertyGroup>
+-      <WixEulaFile>$(USERPROFILE)\.wix\wix$(WixToolsetMajorVersion)-osmf-eula.txt</WixEulaFile>
+-    </PropertyGroup>
+-
+-    <Error
+-      Text="You must accept the Open Source Maintenance Fee (OSMF) EULA to use WiX Toolset v$(WixToolsetMajorVersion). For instructions, see https://wixtoolset.org/osmf/"
+-      Code="WIX7015"
+-      File="$(MSBuildProjectFile)"
+-      HelpLink="https://wixtoolset.org/osmf"
+-      Condition=" !Exists('$(WixEulaFile)') " />
+-  </Target>
+-
+   <!--
+     ***********************************************************************************************
+     ***********************************************************************************************
+@@ -256,7 +239,6 @@
+     -->
+   <PropertyGroup>
+     <PrepareForBuildDependsOn>
+-      CheckLicenseAcceptance;
+       ResolveInstallerPlatform;
+       $(PrepareForBuildDependsOn)
+     </PrepareForBuildDependsOn>
 diff --git a/src/wix/pack-wix/pack-wix.nuspec b/src/wix/pack-wix/pack-wix.nuspec
 index 5d0c6193..8493e9b6 100644
 --- a/src/wix/pack-wix/pack-wix.nuspec

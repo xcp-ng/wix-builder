@@ -1,4 +1,4 @@
-0001-Delete-OSMF-EULA-references.patch
+0001-Delete-OSMF-EULA-references-and-checks.patch
 0002-Disable-tests.patch
 0003-Build-projects-previously-implied-by-tests.patch
 0004-Restore-projects-via-msbuild.patch
