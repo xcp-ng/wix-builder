@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-$patches = Get-Content .\wix-builder\patches\series | Where-Object { $_ -notlike "#*" }
+$patches = Get-Content .\wix-builder\patches\series | Where-Object { $_ -and $_ -notlike "#*" }
 $patches | ForEach-Object {
     Write-Host "Applying $_"
     git apply .\wix-builder\patches\$_
