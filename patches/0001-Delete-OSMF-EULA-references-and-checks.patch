@@ -1,4 +1,4 @@
-From 3669f9e047ec8f4cecdabf52fe7ccedd3ffb3e83 Mon Sep 17 00:00:00 2001
+From 22be7b0f4204de6fe35990f00a08ab48d8cb85d2 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Mon, 25 May 2026 23:49:23 +0200
 Subject: [PATCH] Delete OSMF EULA references and checks
@@ -20,10 +20,11 @@ Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
  .../wcautil/WixToolset.WcaUtil/wcautil.nuspec |   2 +-
  src/setup/OSMFEULA.rtf                        | Bin 3835 -> 499 bytes
  .../WixToolset.Core.Native.nuspec             |   2 +-
+ .../CommandLine/CommandLine.cs                |   6 --
  src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec  |   2 +-
  src/wix/WixToolset.Sdk/tools/wix.targets      |  35 ----------
  src/wix/pack-wix/pack-wix.nuspec              |   2 +-
- 15 files changed, 13 insertions(+), 134 deletions(-)
+ 16 files changed, 13 insertions(+), 140 deletions(-)
 
 diff --git a/OSMFEULA.txt b/OSMFEULA.txt
 index ead58aa2..05abe5a1 100644
@@ -293,6 +294,23 @@ index b5421c1a..2862054d 100644
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/wix/WixToolset.Core/CommandLine/CommandLine.cs b/src/wix/WixToolset.Core/CommandLine/CommandLine.cs
+index 655a97c7..65df72a1 100644
+--- a/src/wix/WixToolset.Core/CommandLine/CommandLine.cs
++++ b/src/wix/WixToolset.Core/CommandLine/CommandLine.cs
+@@ -128,12 +128,6 @@ namespace WixToolset.Core.CommandLine
+                 extension.PostParse();
+             }
+ 
+-            if (command != null && this.RequiresEulaAcceptance(command) && !EulaCommand.IsAccepted(this.AcceptedEulaValues))
+-            {
+-                parser.ReportErrorArgument("eula", CoreErrors.AcceptEulaRequired());
+-                command = null;
+-            }
+-
+             // If we hit an error, do not return a command.
+             if (!String.IsNullOrEmpty(parser.ErrorArgument))
+             {
 diff --git a/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec b/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec
 index b59415a9..cb1f6070 100644
 --- a/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec
