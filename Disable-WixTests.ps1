@@ -5,7 +5,7 @@
 .DESCRIPTION
     This script performs the following actions:
     1. Prunes test ProjectReferences from all Traversal (_t.proj) files.
-    2. Prunes test projects from all Visual Studio Solution (.sln) files.
+    2. Prunes test projects from all Solution (.slnx) files using XML manipulation.
     3. Deletes packages.config in test directories to block NuGet downloads.
     4. Removes -warnaserror from all build command (.cmd) files.
     5. Ensure Extension Builds in Traversal Projects.
@@ -28,45 +28,22 @@ foreach ($file in $traversalFiles) {
     Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
 }
 
-# 2. Prune Solution (.sln) files
-Write-Host "[2/5] Pruning Solution files..." -ForegroundColor Yellow
-$slnFiles = Get-ChildItem -Path $SrcDir -Filter "*.sln" -Recurse
-foreach ($file in $slnFiles) {
-    $prunedGuids = [System.Collections.Generic.HashSet[string]]::new()
+# 2. Prune Solution (.slnx) files
+Write-Host "[2/5] Pruning Solution (.slnx) files..." -ForegroundColor Yellow
+$slnxFiles = Get-ChildItem -Path $SrcDir -Filter "*.slnx" -Recurse
+foreach ($file in $slnxFiles) {
+    [xml]$xml = Get-Content $file.FullName -Raw
 
-    # Pass 1: Identify projects to remove and capture GUIDs
-    $filteredMetadata = @()
-    $skipping = $false
-    foreach ($line in Get-Content $file.FullName) {
-        if ($line -match 'Project\s*\(".*?"\)\s*=\s*".*?",\s*".*?",\s*"(.*?)"') {
-            $guid = $Matches[1]
-            if ($line -match 'test') {
-                $prunedGuids.Add($guid) | Out-Null
-                $skipping = $true
-                continue
-            }
-        }
-        if ($skipping) {
-            if ($line -match 'EndProject') { $skipping = $false }
-            continue
-        }
-        $filteredMetadata += $line
+    # Find and remove <Project> elements whose Path contains "test" (case-insensitive).
+    # We collect into a static array first because XmlNodeList is live and mutating
+    # during iteration causes skipped nodes.
+    $testProjects = @($xml.SelectNodes("//Project[contains(translate(@Path, 'TEST', 'test'), 'test')]"))
+    foreach ($project in $testProjects) {
+        $project.ParentNode.RemoveChild($project) | Out-Null
     }
 
-    # Pass 2: Clean up dangling GUID references (Metadata/Nesting/BuildConfigs)
-    $finalContent = $filteredMetadata | Where-Object {
-        $line = $_
-        $matched = $false
-        foreach ($guid in $prunedGuids) {
-            if ($line.Contains($guid)) {
-                $matched = $true
-                break
-            }
-        }
-        return (-not $matched)
-    }
-    Set-Content $file.FullName $finalContent
-    Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
+    $xml.Save($file.FullName)
+    Write-Host "  - Processed: $($file.FullName) ($($testProjects.Count) test projects removed)" -ForegroundColor Gray
 }
 
 # 3. Disable packages.config in test directories

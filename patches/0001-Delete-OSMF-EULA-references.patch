@@ -1,0 +1,286 @@
+From 79575433a146f9f4b6ddd0d89c10ec1d357a59c6 Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Mon, 25 May 2026 23:49:23 +0200
+Subject: [PATCH] Delete OSMF EULA references
+
+Our binaries are redistributed under the MS-RL terms and not subject to
+the OSMF EULA. It also lets us set requireLicenseAcceptance to false.
+
+Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
+---
+ OSMFEULA.txt                                  |  66 +-----------------
+ ...xToolset.BootstrapperApplicationApi.nuspec |   2 +-
+ src/api/burn/bextutil/bextutil.nuspec         |   2 +-
+ src/burn/stub/stub.nuspec                     |   2 +-
+ .../WixToolset.Dtf.CustomAction.nuspec        |   2 +-
+ .../WixToolset.Bal.wixext.nuspec              |   2 +-
+ src/ext/Bal/wixstdfn/wixstdfn.nuspec          |   2 +-
+ src/libs/dutil/WixToolset.DUtil/dutil.nuspec  |   2 +-
+ .../wcautil/WixToolset.WcaUtil/wcautil.nuspec |   2 +-
+ src/setup/OSMFEULA.rtf                        | Bin 3835 -> 499 bytes
+ .../WixToolset.Core.Native.nuspec             |   2 +-
+ src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec  |   2 +-
+ src/wix/pack-wix/pack-wix.nuspec              |   2 +-
+ 13 files changed, 13 insertions(+), 75 deletions(-)
+
+diff --git a/OSMFEULA.txt b/OSMFEULA.txt
+index ead58aa2..05abe5a1 100644
+--- a/OSMFEULA.txt
++++ b/OSMFEULA.txt
+@@ -1,64 +1,2 @@
+-End User License Agreement
+-
+-This Open Source Maintenance Fee Agreement ("Agreement") is a legal agreement
+-between you ("User") and WiX Toolset ("Project") for the use of the
+-WiX Toolset ("Software"), an open source software project licensed under
+-the Microsoft Reciprocal License ("OSI License"), an OSI-approved open source license.
+-Project offers a Binary Release of the Software to Users in exchange for a
+-maintenance fee ("Fee"). "Binary Release" refers to pre-compiled executable
+-versions of the Software provided by Project. By accessing or using the
+-Binary Release, User agrees to be bound by the terms of this Agreement.
+-
+-1. Applicability
+-
+-Project agrees to provide User with the Binary Release in exchange for the 
+-Fees outlined in Section 2, subject to the terms of this Agreement. The Fee
+-applies only to Users that use the Software as part of revenue-generating 
+-activities and have an annual gross revenue greater than or equal to 
+-US$10,000. Users whose annual gross revenue is less than US$10,000 are exempt 
+-from this Fee. In addition, Users who pay separate support and/or maintenance
+-fees to the maintainers of the Software are exempt from the Fee outlined in 
+-this Agreement. This distinction ensures that duplicate fees are not imposed, 
+-promoting fairness and consistency while respecting alternative support 
+-arrangements.
+-
+-2. Monthly Fee and Payment Terms
+-
+-Revenue-generating Users required to pay the Fee shall follow the payment 
+-terms set forth by the Project. Failure to comply with these terms may result 
+-in suspending access to the Binary Release. However, this does not restrict 
+-the User from obtaining or redistributing binaries from other sources or 
+-self-compiling them.
+-
+-3. Nature of the Fee
+-
+-The Fee is not a license fee. The Software's source code is licensed to User 
+-under the OSI License and remains freely distributable under the terms of the 
+-OSI License and any applicable open-source licenses.
+-
+-4. Conflicts with OSI License
+-
+-To the extent any term of this Agreement conflicts with User's rights 
+-under the OSI License regarding the Software, the OSI License shall govern. 
+-This Agreement applies only to the Binary Release and does not limit User's 
+-ability to access, modify, or distribute the Software's source code or 
+-self-compiled binaries. User may independently compile binaries from the 
+-Software's source code without this Agreement, subject to OSI License terms. 
+-User may redistribute the Binary Release received under this Agreement, 
+-provided such redistribution complies with the OSI License (e.g., including 
+-copyright and permission notices). This Agreement imposes no additional 
+-restrictions on such rights.
+-
+-5. Disclaimer of Warranty and Limitation of Liability
+-
+-THE SOFTWARE AND BINARY RELEASE ARE PROVIDED BY THE PROJECT "AS IS" AND ANY 
+-EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+-DISCLAIMED. IN NO EVENT SHALL THE PROJECT OR ITS CONTRIBUTORS BE LIABLE FOR 
+-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
+-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
+-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+-OF THE SOFTWARE AND BINARY RELEASE, EVEN IF ADVISED OF THE POSSIBILITY OF 
+-SUCH DAMAGE.
++Copyright (c) .NET Foundation and contributors.
++This software is released under the Microsoft Reciprocal License (MS-RL) (the "License"); you may not use the software except in compliance with the License.
+diff --git a/src/api/burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.nuspec b/src/api/burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.nuspec
+index 398a16b7..b8521b0e 100644
+--- a/src/api/burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.nuspec
++++ b/src/api/burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/api/burn/bextutil/bextutil.nuspec b/src/api/burn/bextutil/bextutil.nuspec
+index 6efdf0fc..6ecc3f64 100644
+--- a/src/api/burn/bextutil/bextutil.nuspec
++++ b/src/api/burn/bextutil/bextutil.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/burn/stub/stub.nuspec b/src/burn/stub/stub.nuspec
+index e8506505..8b1d4b92 100644
+--- a/src/burn/stub/stub.nuspec
++++ b/src/burn/stub/stub.nuspec
+@@ -7,7 +7,7 @@
+     <description>$description$</description>
+     <authors>$authors$</authors>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/dtf/WixToolset.Dtf.CustomAction/WixToolset.Dtf.CustomAction.nuspec b/src/dtf/WixToolset.Dtf.CustomAction/WixToolset.Dtf.CustomAction.nuspec
+index 37cc3e86..16692ce3 100644
+--- a/src/dtf/WixToolset.Dtf.CustomAction/WixToolset.Dtf.CustomAction.nuspec
++++ b/src/dtf/WixToolset.Dtf.CustomAction/WixToolset.Dtf.CustomAction.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$ CustomActions</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/ext/Bal/wixext-backward-compatible/WixToolset.Bal.wixext.nuspec b/src/ext/Bal/wixext-backward-compatible/WixToolset.Bal.wixext.nuspec
+index c7b4a6ea..190d440c 100644
+--- a/src/ext/Bal/wixext-backward-compatible/WixToolset.Bal.wixext.nuspec
++++ b/src/ext/Bal/wixext-backward-compatible/WixToolset.Bal.wixext.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/ext/Bal/wixstdfn/wixstdfn.nuspec b/src/ext/Bal/wixstdfn/wixstdfn.nuspec
+index b125ff7c..29a3e91a 100644
+--- a/src/ext/Bal/wixstdfn/wixstdfn.nuspec
++++ b/src/ext/Bal/wixstdfn/wixstdfn.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/libs/dutil/WixToolset.DUtil/dutil.nuspec b/src/libs/dutil/WixToolset.DUtil/dutil.nuspec
+index eb3833a5..1643771d 100644
+--- a/src/libs/dutil/WixToolset.DUtil/dutil.nuspec
++++ b/src/libs/dutil/WixToolset.DUtil/dutil.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/libs/wcautil/WixToolset.WcaUtil/wcautil.nuspec b/src/libs/wcautil/WixToolset.WcaUtil/wcautil.nuspec
+index 78ac10a4..5a6ce57e 100644
+--- a/src/libs/wcautil/WixToolset.WcaUtil/wcautil.nuspec
++++ b/src/libs/wcautil/WixToolset.WcaUtil/wcautil.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/setup/OSMFEULA.rtf b/src/setup/OSMFEULA.rtf
+index b6e5bbe5219238aa6dbb75dd2b63cd06df2f08a7..cd49a5f89a71a9ee157d9a5ce5da8acc7c624262 100644
+GIT binary patch
+delta 191
+zcmX|)u?oU46h#%cLO(%xbZSBS1CFADRtN3q64R#%v`I)_s2%(V#qZMpaCUUDN^!ez
+zF6X?5ufgSheJqw!Z5k_&f*|Gzr0ZD@bL~~ZNNNR46~MJ3EBBtXb?MG98wR<M4xBzv
+z%`8H@Etbe`&;AHk+wmq#ASQtjWs;+E7$p;Ew1<i{pfrJZ2w(m;;EAIlkgAPUrj$%^
+Qgj$mL-8xIxK8Hc?19n|Q{Qv*}
+
+literal 3835
+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
+UCmOu+cgvTq09_m5uhGB!4<n!u<p2Nx
+
+diff --git a/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.nuspec b/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.nuspec
+index b5421c1a..2862054d 100644
+--- a/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.nuspec
++++ b/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.nuspec
+@@ -7,7 +7,7 @@
+     <description>$description$</description>
+     <authors>$authors$</authors>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec b/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec
+index b59415a9..cb1f6070 100644
+--- a/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec
++++ b/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>
+diff --git a/src/wix/pack-wix/pack-wix.nuspec b/src/wix/pack-wix/pack-wix.nuspec
+index 5d0c6193..8493e9b6 100644
+--- a/src/wix/pack-wix/pack-wix.nuspec
++++ b/src/wix/pack-wix/pack-wix.nuspec
+@@ -9,7 +9,7 @@
+     <icon>icon.png</icon>
+     <readme>README.md</readme>
+     <license type="file">OSMFEULA.txt</license>
+-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+     <tags>$packageTags$</tags>
+     <copyright>$copyright$</copyright>
+     <projectUrl>$projectUrl$</projectUrl>

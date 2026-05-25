@@ -1,0 +1,52 @@
+From f387c30edaff9669cfd3f2c9a97fa768fd45bd8d Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Sat, 7 Mar 2026 16:48:51 +0100
+Subject: [PATCH] Build projects previously implied by tests
+
+Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
+---
+ src/api/burn/api_burn_t.proj | 2 +-
+ src/ext/Bal/bal_t.proj       | 2 +-
+ src/libs/dutil/dutil_t.proj  | 4 ++--
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/src/api/burn/api_burn_t.proj b/src/api/burn/api_burn_t.proj
+index aa1bc628..15ea6b59 100644
+--- a/src/api/burn/api_burn_t.proj
++++ b/src/api/burn/api_burn_t.proj
+@@ -17,7 +17,7 @@
+ 
+     <!-- Build -->
+ 
+-    <!-- bextutil x86 is built by BextUtilUnitTest -->
++    <ProjectReference Include="bextutil\bextutil.vcxproj" Properties="Platform=x86" />
+     <ProjectReference Include="bextutil\bextutil.vcxproj" Properties="Platform=x64" />
+     <ProjectReference Include="bextutil\bextutil.vcxproj" Properties="Platform=ARM64" />
+ 
+diff --git a/src/ext/Bal/bal_t.proj b/src/ext/Bal/bal_t.proj
+index a7e4d569..3aed4b02 100644
+--- a/src/ext/Bal/bal_t.proj
++++ b/src/ext/Bal/bal_t.proj
+@@ -6,7 +6,7 @@
+     <!-- C++/CLI projects will try to build their dependent projects in parallel with others, so they must be built first. -->
+     <ProjectReference Include="test\WixStdFnUnitTest\WixStdFnUnitTest.vcxproj" Properties="Platform=x86" BuildInParallel="false" />
+ 
+-    <!-- wixstdfn x86 is built by WixStdFnUnitTest -->
++    <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="Platform=x86" />
+     <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="Platform=x64" />
+     <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="Platform=ARM64" />
+ 
+diff --git a/src/libs/dutil/dutil_t.proj b/src/libs/dutil/dutil_t.proj
+index bd9ee7c8..a55adbab 100644
+--- a/src/libs/dutil/dutil_t.proj
++++ b/src/libs/dutil/dutil_t.proj
+@@ -1,7 +1,7 @@
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\DUtilUnitTest\DUtilUnitTest.vcxproj" Properties="Platform=x64" />
+-    <ProjectReference Include="test\DUtilUnitTest\DUtilUnitTest.vcxproj" Properties="Platform=x86" />
++    <ProjectReference Include="WixToolset.DUtil\dutil.vcxproj" Properties="Platform=x86" />
++    <ProjectReference Include="WixToolset.DUtil\dutil.vcxproj" Properties="Platform=x64" />
+     <ProjectReference Include="WixToolset.DUtil\dutil.vcxproj" Properties="Platform=ARM64" />
+ 
+     <ProjectReference Include="WixToolset.DUtil\dutil.vcxproj" Targets="PackNative" />

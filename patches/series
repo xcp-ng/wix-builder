@@ -1,4 +1,5 @@
-0001-Disable-tests.patch
-0002-Build-projects-previously-implied-by-tests.patch
-0003-Restore-projects-via-msbuild.patch
-0004-Add-build-location-hack-for-burn.patch
+0001-Delete-OSMF-EULA-references.patch
+0002-Disable-tests.patch
+0003-Build-projects-previously-implied-by-tests.patch
+0004-Restore-projects-via-msbuild.patch
+0005-Add-build-location-hack-for-burn.patch
