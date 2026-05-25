@@ -1,4 +1,4 @@
-From bae83b19e8354f2afebea64fedb7b2cf1bc7c2ab Mon Sep 17 00:00:00 2001
+From 3669f9e047ec8f4cecdabf52fe7ccedd3ffb3e83 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Mon, 25 May 2026 23:49:23 +0200
 Subject: [PATCH] Delete OSMF EULA references and checks
@@ -21,9 +21,9 @@ Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
  src/setup/OSMFEULA.rtf                        | Bin 3835 -> 499 bytes
  .../WixToolset.Core.Native.nuspec             |   2 +-
  src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec  |   2 +-
- src/wix/WixToolset.Sdk/tools/wix.targets      |  18 -----
+ src/wix/WixToolset.Sdk/tools/wix.targets      |  35 ----------
  src/wix/pack-wix/pack-wix.nuspec              |   2 +-
- 15 files changed, 13 insertions(+), 117 deletions(-)
+ 15 files changed, 13 insertions(+), 134 deletions(-)
 
 diff --git a/OSMFEULA.txt b/OSMFEULA.txt
 index ead58aa2..05abe5a1 100644
@@ -307,13 +307,37 @@ index b59415a9..cb1f6070 100644
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
 diff --git a/src/wix/WixToolset.Sdk/tools/wix.targets b/src/wix/WixToolset.Sdk/tools/wix.targets
-index 88317edc..3b8cb252 100644
+index 88317edc..30f6f5a5 100644
 --- a/src/wix/WixToolset.Sdk/tools/wix.targets
 +++ b/src/wix/WixToolset.Sdk/tools/wix.targets
-@@ -205,23 +205,6 @@
-         ToolPath="$(WixToolDir)" />
-   </Target>
+@@ -43,7 +43,6 @@
+   <UsingTask TaskName="ResolveInstallerPlatform" AssemblyFile="$(WixTasksPath)" />
+   <UsingTask TaskName="ResolveWixReferences" AssemblyFile="$(WixTasksPath)" />
+   <UsingTask TaskName="WixBuild" AssemblyFile="$(WixTasksPath)" />
+-  <UsingTask TaskName="WixAcceptEula" AssemblyFile="$(WixTasksPath)" />
+   <UsingTask TaskName="WindowsInstallerValidation" AssemblyFile="$(WixTasksPath)" />
  
+   <!--
+@@ -189,39 +188,6 @@
+     ***********************************************************************************************
+     -->
+ 
+-  <Target
+-    Name="AcceptEula">
+-
+-    <Error
+-      Text="The 'EulaId' property is required. Add '-p:EulaId={eulaId}' to your command-line. For instructions, see https://wixtoolset.org/osmf/"
+-      File="$(MSBuildProjectFile)"
+-      HelpLink="https://wixtoolset.org/osmf"
+-      Condition=" '$(EulaId)' == '' " />
+-
+-    <WixAcceptEula
+-        EulaId="$(EulaId)"
+-        NoLogo="true"
+-        ToolExe="$(WixToolExe)"
+-        ToolPath="$(WixToolDir)" />
+-  </Target>
+-
 -  <Target
 -    Name="CheckLicenseAcceptance"
 -    BeforeTargets="CoreCompile"
@@ -334,7 +358,7 @@ index 88317edc..3b8cb252 100644
    <!--
      ***********************************************************************************************
      ***********************************************************************************************
-@@ -256,7 +239,6 @@
+@@ -256,7 +222,6 @@
      -->
    <PropertyGroup>
      <PrepareForBuildDependsOn>

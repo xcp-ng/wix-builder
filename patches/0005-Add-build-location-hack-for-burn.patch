@@ -1,4 +1,4 @@
-From 8a87ef32b3c594e9b61bd9c3d1adc92005ebf1d7 Mon Sep 17 00:00:00 2001
+From 58e055383829eef4b2ba551bd01198834fb07faa Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Sat, 7 Mar 2026 16:57:21 +0100
 Subject: [PATCH] Add build location hack for burn
