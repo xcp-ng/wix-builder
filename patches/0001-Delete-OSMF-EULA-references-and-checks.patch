@@ -1,4 +1,4 @@
-From 22be7b0f4204de6fe35990f00a08ab48d8cb85d2 Mon Sep 17 00:00:00 2001
+From e249e3807bf6da809c00d3688ce332b7686775dd Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Mon, 25 May 2026 23:49:23 +0200
 Subject: [PATCH] Delete OSMF EULA references and checks
@@ -9,22 +9,22 @@ the OSMF EULA. It also lets us set requireLicenseAcceptance to false.
 Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
 ---
  OSMFEULA.txt                                  |  66 +-----------------
- ...xToolset.BootstrapperApplicationApi.nuspec |   2 +-
- src/api/burn/bextutil/bextutil.nuspec         |   2 +-
- src/burn/stub/stub.nuspec                     |   2 +-
- .../WixToolset.Dtf.CustomAction.nuspec        |   2 +-
- .../WixToolset.Bal.wixext.nuspec              |   2 +-
- src/ext/Bal/wixstdfn/wixstdfn.nuspec          |   2 +-
+ ...xToolset.BootstrapperApplicationApi.nuspec |   4 +-
+ src/api/burn/bextutil/bextutil.nuspec         |   4 +-
+ src/burn/stub/stub.nuspec                     |   4 +-
+ .../WixToolset.Dtf.CustomAction.nuspec        |   4 +-
+ .../WixToolset.Bal.wixext.nuspec              |   4 +-
+ src/ext/Bal/wixstdfn/wixstdfn.nuspec          |   4 +-
  .../targets/CheckLicenseAcceptance.targets    |  24 -------
- src/libs/dutil/WixToolset.DUtil/dutil.nuspec  |   2 +-
- .../wcautil/WixToolset.WcaUtil/wcautil.nuspec |   2 +-
+ src/libs/dutil/WixToolset.DUtil/dutil.nuspec  |   4 +-
+ .../wcautil/WixToolset.WcaUtil/wcautil.nuspec |   4 +-
  src/setup/OSMFEULA.rtf                        | Bin 3835 -> 499 bytes
- .../WixToolset.Core.Native.nuspec             |   2 +-
+ .../WixToolset.Core.Native.nuspec             |   4 +-
  .../CommandLine/CommandLine.cs                |   6 --
- src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec  |   2 +-
+ src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec  |   4 +-
  src/wix/WixToolset.Sdk/tools/wix.targets      |  35 ----------
- src/wix/pack-wix/pack-wix.nuspec              |   2 +-
- 16 files changed, 13 insertions(+), 140 deletions(-)
+ src/wix/pack-wix/pack-wix.nuspec              |   4 +-
+ 16 files changed, 24 insertions(+), 151 deletions(-)
 
 diff --git a/OSMFEULA.txt b/OSMFEULA.txt
 index ead58aa2..05abe5a1 100644
@@ -98,79 +98,91 @@ index ead58aa2..05abe5a1 100644
 +Copyright (c) .NET Foundation and contributors.
 +This software is released under the Microsoft Reciprocal License (MS-RL) (the "License"); you may not use the software except in compliance with the License.
 diff --git a/src/api/burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.nuspec b/src/api/burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.nuspec
-index 398a16b7..b8521b0e 100644
+index 398a16b7..5f38236e 100644
 --- a/src/api/burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.nuspec
 +++ b/src/api/burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
 diff --git a/src/api/burn/bextutil/bextutil.nuspec b/src/api/burn/bextutil/bextutil.nuspec
-index 6efdf0fc..6ecc3f64 100644
+index 6efdf0fc..01f4963d 100644
 --- a/src/api/burn/bextutil/bextutil.nuspec
 +++ b/src/api/burn/bextutil/bextutil.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
 diff --git a/src/burn/stub/stub.nuspec b/src/burn/stub/stub.nuspec
-index e8506505..8b1d4b92 100644
+index e8506505..ad0fe50a 100644
 --- a/src/burn/stub/stub.nuspec
 +++ b/src/burn/stub/stub.nuspec
-@@ -7,7 +7,7 @@
+@@ -6,8 +6,8 @@
+     <title>$title$</title>
      <description>$description$</description>
      <authors>$authors$</authors>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
 diff --git a/src/dtf/WixToolset.Dtf.CustomAction/WixToolset.Dtf.CustomAction.nuspec b/src/dtf/WixToolset.Dtf.CustomAction/WixToolset.Dtf.CustomAction.nuspec
-index 37cc3e86..16692ce3 100644
+index 37cc3e86..f3a9e9fe 100644
 --- a/src/dtf/WixToolset.Dtf.CustomAction/WixToolset.Dtf.CustomAction.nuspec
 +++ b/src/dtf/WixToolset.Dtf.CustomAction/WixToolset.Dtf.CustomAction.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$ CustomActions</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
 diff --git a/src/ext/Bal/wixext-backward-compatible/WixToolset.Bal.wixext.nuspec b/src/ext/Bal/wixext-backward-compatible/WixToolset.Bal.wixext.nuspec
-index c7b4a6ea..190d440c 100644
+index c7b4a6ea..6b6660dc 100644
 --- a/src/ext/Bal/wixext-backward-compatible/WixToolset.Bal.wixext.nuspec
 +++ b/src/ext/Bal/wixext-backward-compatible/WixToolset.Bal.wixext.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
 diff --git a/src/ext/Bal/wixstdfn/wixstdfn.nuspec b/src/ext/Bal/wixstdfn/wixstdfn.nuspec
-index b125ff7c..29a3e91a 100644
+index b125ff7c..439fa3ff 100644
 --- a/src/ext/Bal/wixstdfn/wixstdfn.nuspec
 +++ b/src/ext/Bal/wixstdfn/wixstdfn.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
@@ -209,27 +221,31 @@ index 61155827..405fb0c9 100644
 -
  </Project>
 diff --git a/src/libs/dutil/WixToolset.DUtil/dutil.nuspec b/src/libs/dutil/WixToolset.DUtil/dutil.nuspec
-index eb3833a5..1643771d 100644
+index eb3833a5..c274e0fb 100644
 --- a/src/libs/dutil/WixToolset.DUtil/dutil.nuspec
 +++ b/src/libs/dutil/WixToolset.DUtil/dutil.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
 diff --git a/src/libs/wcautil/WixToolset.WcaUtil/wcautil.nuspec b/src/libs/wcautil/WixToolset.WcaUtil/wcautil.nuspec
-index 78ac10a4..5a6ce57e 100644
+index 78ac10a4..dad96ce0 100644
 --- a/src/libs/wcautil/WixToolset.WcaUtil/wcautil.nuspec
 +++ b/src/libs/wcautil/WixToolset.WcaUtil/wcautil.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
@@ -282,14 +298,16 @@ zww$HKXk7O4YWvnb6lMe2GrQ!luO?zb9Ei(W1FHV<Ph<+lQC6~_$XtDbS17Q(4k7q<
 UCmOu+cgvTq09_m5uhGB!4<n!u<p2Nx
 
 diff --git a/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.nuspec b/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.nuspec
-index b5421c1a..2862054d 100644
+index b5421c1a..76e73761 100644
 --- a/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.nuspec
 +++ b/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.nuspec
-@@ -7,7 +7,7 @@
+@@ -6,8 +6,8 @@
+     <title>$title$</title>
      <description>$description$</description>
      <authors>$authors$</authors>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
@@ -312,14 +330,16 @@ index 655a97c7..65df72a1 100644
              if (!String.IsNullOrEmpty(parser.ErrorArgument))
              {
 diff --git a/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec b/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec
-index b59415a9..cb1f6070 100644
+index b59415a9..bba25b83 100644
 --- a/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec
 +++ b/src/wix/WixToolset.Sdk/WixToolset.Sdk.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>
@@ -385,14 +405,16 @@ index 88317edc..30f6f5a5 100644
        $(PrepareForBuildDependsOn)
      </PrepareForBuildDependsOn>
 diff --git a/src/wix/pack-wix/pack-wix.nuspec b/src/wix/pack-wix/pack-wix.nuspec
-index 5d0c6193..8493e9b6 100644
+index 5d0c6193..2f5379ff 100644
 --- a/src/wix/pack-wix/pack-wix.nuspec
 +++ b/src/wix/pack-wix/pack-wix.nuspec
-@@ -9,7 +9,7 @@
+@@ -8,8 +8,8 @@
+     <authors>$authors$</authors>
      <icon>icon.png</icon>
      <readme>README.md</readme>
-     <license type="file">OSMFEULA.txt</license>
+-    <license type="file">OSMFEULA.txt</license>
 -    <requireLicenseAcceptance>true</requireLicenseAcceptance>
++    <license type="expression">MS-RL</license>
 +    <requireLicenseAcceptance>false</requireLicenseAcceptance>
      <tags>$packageTags$</tags>
      <copyright>$copyright$</copyright>

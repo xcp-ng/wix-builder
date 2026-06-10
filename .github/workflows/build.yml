@@ -11,7 +11,7 @@ env:
   VENDOR_NAME: XCP-ng
   WIX_REPO: xcp-ng/wix
   WIX_REVISION: b8977d6f88e7b68e000bac226a2814f236770570 # v7.0.0
-  WIX_VERSION: v7.0.0-xcpng.4
+  WIX_VERSION: v7.0.0-xcpng.5
 
 jobs:
   build:
