@@ -15,21 +15,25 @@ $ErrorActionPreference = "Stop"
 $RootDir = Get-Item "."
 $SrcDir = Join-Path $RootDir.FullName "src"
 
-Write-Host "--- NEUTERING TESTS FOR PRODUCTION BUILD ---" -ForegroundColor Cyan
+Write-Host "--- NEUTERING TESTS FOR PRODUCTION BUILD ---"
 
 # 1. Prune Traversal (_t.proj) files
-Write-Host "[1/5] Pruning Traversal projects..." -ForegroundColor Yellow
+Write-Host "[1/5] Pruning Traversal projects..."
 $traversalFiles = Get-ChildItem -Path $SrcDir -Filter "*_t.proj" -Recurse
 foreach ($file in $traversalFiles) {
     $newContent = Get-Content $file.FullName | Where-Object {
         $_ -notmatch '<ProjectReference Include=".*?test.*?".*?/>'
     }
     Set-Content $file.FullName $newContent
-    Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
+    Write-Host "  - Processed: $($file.FullName)"
+}
+git commit -a -m "Prune Traversal projects"
+if ($LASTEXITCODE -ne 0) {
+    throw "git commit exited with code $LASTEXITCODE"
 }
 
 # 2. Prune Solution (.slnx) files
-Write-Host "[2/5] Pruning Solution (.slnx) files..." -ForegroundColor Yellow
+Write-Host "[2/5] Pruning Solution (.slnx) files..."
 $slnxFiles = Get-ChildItem -Path $SrcDir -Filter "*.slnx" -Recurse
 foreach ($file in $slnxFiles) {
     [xml]$xml = Get-Content $file.FullName -Raw
@@ -43,32 +47,44 @@ foreach ($file in $slnxFiles) {
     }
 
     $xml.Save($file.FullName)
-    Write-Host "  - Processed: $($file.FullName) ($($testProjects.Count) test projects removed)" -ForegroundColor Gray
+    Write-Host "  - Processed: $($file.FullName) ($($testProjects.Count) test projects removed)"
+}
+git commit -a -m "Prune slnx files"
+if ($LASTEXITCODE -ne 0) {
+    throw "git commit exited with code $LASTEXITCODE"
 }
 
 # 3. Disable packages.config in test directories
-Write-Host "[3/5] Deleting test packages.config..." -ForegroundColor Yellow
+Write-Host "[3/5] Deleting test packages.config..."
 $packageConfigs = Get-ChildItem -Path $SrcDir -Filter "packages.config" -Recurse
 foreach ($file in $packageConfigs) {
     if ($file.FullName -match "test") {
         Remove-Item $file.FullName
-        Write-Host "  - Deleted: $($file.FullName)" -ForegroundColor Gray
+        Write-Host "  - Deleted: $($file.FullName)"
     }
+}
+git commit -a -m "Disable packages.config"
+if ($LASTEXITCODE -ne 0) {
+    throw "git commit exited with code $LASTEXITCODE"
 }
 
 # 4. Remove -warnaserror from .cmd files
-Write-Host "[4/5] Removing -warnaserror from scripts..." -ForegroundColor Yellow
+Write-Host "[4/5] Removing -warnaserror from scripts..."
 $cmdFiles = Get-ChildItem -Path $RootDir -Filter "*.cmd" -Recurse
 foreach ($file in $cmdFiles) {
     $newContent = Get-Content $file.FullName | ForEach-Object {
         $_ -replace '-warnaserror\s*', ""
     }
     Set-Content $file.FullName $newContent
-    Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
+    Write-Host "  - Processed: $($file.FullName)"
+}
+git commit -a -m "Remove -warnaserror"
+if ($LASTEXITCODE -ne 0) {
+    throw "git commit exited with code $LASTEXITCODE"
 }
 
 # 5. Ensure Extension Builds in Traversal Projects
-Write-Host "[5/5] Ensuring Extension builds..." -ForegroundColor Yellow
+Write-Host "[5/5] Ensuring Extension builds..."
 $extTraversalFiles = Get-ChildItem -Path (Join-Path $SrcDir "ext") -Filter "*_t.proj" -Recurse
 foreach ($file in $extTraversalFiles) {
     $content = Get-Content $file.FullName
@@ -97,8 +113,12 @@ foreach ($file in $extTraversalFiles) {
     }
 
     Set-Content $file.FullName $newLines
-    Write-Host "  - Processed: $($file.FullName)" -ForegroundColor Gray
+    Write-Host "  - Processed: $($file.FullName)"
+}
+git commit -a -m "Ensure Extension builds"
+if ($LASTEXITCODE -ne 0) {
+    throw "git commit exited with code $LASTEXITCODE"
 }
 
-Write-Host "--- NEUTERING COMPLETE ---" -ForegroundColor Green
-Write-Host "Run 'devbuild.cmd Release' to verify." -ForegroundColor Cyan
+Write-Host "--- NEUTERING COMPLETE ---"
+Write-Host "Run 'devbuild.cmd Release' to verify."

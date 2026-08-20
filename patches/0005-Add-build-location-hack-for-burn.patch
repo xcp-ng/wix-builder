@@ -1,15 +1,12 @@
-From 3c6c99b43b573b6a9868829cc687a1a7c76b924b Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Sat, 7 Mar 2026 16:57:21 +0100
 Subject: [PATCH] Add build location hack for burn
 
 Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
----
- src/burn/Directory.Build.props | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/burn/Directory.Build.props b/src/burn/Directory.Build.props
-index 6050781d..40e24661 100644
+index 6050781df732..40e24661e211 100644
 --- a/src/burn/Directory.Build.props
 +++ b/src/burn/Directory.Build.props
 @@ -7,8 +7,8 @@

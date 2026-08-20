@@ -1,0 +1,620 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Thu, 20 Aug 2026 19:52:42 +0200
+Subject: [PATCH] Prune slnx files
+
+
+diff --git a/src/api/api.slnx b/src/api/api.slnx
+index f0104cc005a1..88aadb340290 100644
+--- a/src/api/api.slnx
++++ b/src/api/api.slnx
+@@ -18,24 +18,10 @@
+       <Platform Solution="*|Any CPU" Project="Win32" />
+       <Build Solution="Release|Any CPU" Project="false" />
+     </Project>
+-    <Project Path="burn/test/BalUtilUnitTest/BalUtilUnitTest.vcxproj" Id="9b507af9-035e-4db6-8c0c-5dcc3fef2631">
+-      <Platform Project="Win32" />
+-      <Build Solution="*|ARM64" Project="false" />
+-      <Build Solution="*|x64" Project="false" />
+-      <Build Solution="Release|Any CPU" Project="false" />
+-    </Project>
+-    <Project Path="burn/test/BextUtilUnitTest/BextUtilUnitTest.vcxproj" Id="b69e6422-49b0-4e28-92f9-b8a7410a6ed9">
+-      <Platform Project="Win32" />
+-      <Build Solution="*|ARM64" Project="false" />
+-      <Build Solution="*|x64" Project="false" />
+-      <Build Solution="Release|Any CPU" Project="false" />
+-    </Project>
+-    <Project Path="burn/test/WixToolsetTest.BootstrapperApplicationApi/WixToolsetTest.BootstrapperApplicationApi.csproj" />
+     <Project Path="burn/WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.csproj" />
+   </Folder>
+   <Folder Name="/wix/">
+-    <Project Path="wix/test/WixToolsetTest.Data/WixToolsetTest.Data.csproj" />
+     <Project Path="wix/WixToolset.Data/WixToolset.Data.csproj" />
+     <Project Path="wix/WixToolset.Extensibility/WixToolset.Extensibility.csproj" />
+   </Folder>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/api/burn/api_burn.slnx b/src/api/burn/api_burn.slnx
+index df4bd8ce411c..7754d0c96879 100644
+--- a/src/api/burn/api_burn.slnx
++++ b/src/api/burn/api_burn.slnx
+@@ -7,16 +7,5 @@
+   <Project Path="balutil/balutil.vcxproj" Id="edcb8095-0e6a-43e0-bc33-c4f762fc5cdb" />
+   <Project Path="bextutil/bextutil.vcxproj" Id="06027492-1cb9-48bc-b31e-c1f9356ed07e" />
+   <Project Path="mbanative/mbanative.vcxproj" Id="665e0441-17f9-4105-b202-edf274657f6e" />
+-  <Project Path="test/BalUtilUnitTest/BalUtilUnitTest.vcxproj" Id="9b507af9-035e-4db6-8c0c-5dcc3fef2631">
+-    <Platform Project="Win32" />
+-    <Build Solution="*|ARM64" Project="false" />
+-    <Build Solution="*|x64" Project="false" />
+-  </Project>
+-  <Project Path="test/BextUtilUnitTest/BextUtilUnitTest.vcxproj" Id="b69e6422-49b0-4e28-92f9-b8a7410a6ed9">
+-    <Platform Project="Win32" />
+-    <Build Solution="*|ARM64" Project="false" />
+-    <Build Solution="*|x64" Project="false" />
+-  </Project>
+-  <Project Path="test/WixToolsetTest.BootstrapperApplicationApi/WixToolsetTest.BootstrapperApplicationApi.csproj" />
+   <Project Path="WixToolset.BootstrapperApplicationApi/WixToolset.BootstrapperApplicationApi.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/api/wix/api_wix.slnx b/src/api/wix/api_wix.slnx
+index d7f1dda8d96d..2fbc24d215fe 100644
+--- a/src/api/wix/api_wix.slnx
++++ b/src/api/wix/api_wix.slnx
+@@ -4,7 +4,6 @@
+     <Platform Name="x64" />
+     <Platform Name="x86" />
+   </Configurations>
+-  <Project Path="test/WixToolsetTest.Data/WixToolsetTest.Data.csproj" />
+   <Project Path="WixToolset.Data/WixToolset.Data.csproj" />
+   <Project Path="WixToolset.Extensibility/WixToolset.Extensibility.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/burn/burn.slnx b/src/burn/burn.slnx
+index 76a9303692db..aa4e4c2337e8 100644
+--- a/src/burn/burn.slnx
++++ b/src/burn/burn.slnx
+@@ -6,8 +6,4 @@
+   </Configurations>
+   <Project Path="engine/engine.vcxproj" Id="8119537d-e1d9-6591-d51a-49768a2f9c37" />
+   <Project Path="stub/stub.vcxproj" Id="c38373aa-882f-4f55-b03f-2aab4bfbe3f1" />
+-  <Project Path="test/BurnUnitTest/BurnUnitTest.vcxproj" Id="9d1f1ba3-9393-4833-87a3-d5f1fc08ef67">
+-    <Platform Solution="*|ARM64" Project="x64" />
+-    <Build Solution="*|ARM64" Project="false" />
+-  </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/dtf/dtf.slnx b/src/dtf/dtf.slnx
+index 9e3a604fd541..3110a64e0ea0 100644
+--- a/src/dtf/dtf.slnx
++++ b/src/dtf/dtf.slnx
+@@ -5,24 +5,6 @@
+     <Platform Name="x86" />
+   </Configurations>
+   <Folder Name="/test/">
+-    <Project Path="test/WixToolsetTests.Dtf.Compression.Cab/WixToolsetTests.Dtf.Compression.Cab.csproj" Id="4544158c-2d63-4146-85ff-62169280144e">
+-      <BuildType Solution="Release|Any CPU" Project="Debug" />
+-    </Project>
+-    <Project Path="test/WixToolsetTests.Dtf.Compression.Zip/WixToolsetTests.Dtf.Compression.Zip.csproj" Id="328799bb-7b03-4b28-8180-4132211fd07d">
+-      <BuildType Solution="Release|Any CPU" Project="Debug" />
+-    </Project>
+-    <Project Path="test/WixToolsetTests.Dtf.Compression/WixToolsetTests.Dtf.Compression.csproj" Id="f045ffc1-05f9-4ea2-9f03-e1cbdb7bc4f9">
+-      <BuildType Solution="Release|Any CPU" Project="Debug" />
+-    </Project>
+-    <Project Path="test/WixToolsetTests.Dtf.WindowsInstaller.CustomActions/WixToolsetTests.Dtf.WindowsInstaller.CustomActions.csproj" Id="137d376b-989f-4fea-9a67-01d8d38ca0de">
+-      <BuildType Solution="Release|Any CPU" Project="Debug" />
+-    </Project>
+-    <Project Path="test/WixToolsetTests.Dtf.WindowsInstaller.Linq/WixToolsetTests.Dtf.WindowsInstaller.Linq.csproj" Id="4f55f9b8-d8b6-41eb-8796-221b4cd98324">
+-      <BuildType Solution="Release|Any CPU" Project="Debug" />
+-    </Project>
+-    <Project Path="test/WixToolsetTests.Dtf.WindowsInstaller/WixToolsetTests.Dtf.WindowsInstaller.csproj" Id="16f5202f-9276-4166-975c-c9654baf8012">
+-      <BuildType Solution="Release|Any CPU" Project="Debug" />
+-    </Project>
+   </Folder>
+   <Project Path="WixToolset.Dtf.Compression.Cab/WixToolset.Dtf.Compression.Cab.csproj" />
+   <Project Path="WixToolset.Dtf.Compression.Zip/WixToolset.Dtf.Compression.Zip.csproj" />
+@@ -33,4 +15,4 @@
+   <Project Path="WixToolset.Dtf.WindowsInstaller.Linq/WixToolset.Dtf.WindowsInstaller.Linq.csproj" />
+   <Project Path="WixToolset.Dtf.WindowsInstaller.Package/WixToolset.Dtf.WindowsInstaller.Package.csproj" />
+   <Project Path="WixToolset.Dtf.WindowsInstaller/WixToolset.Dtf.WindowsInstaller.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/Bal/Bal.wixext.slnx b/src/ext/Bal/Bal.wixext.slnx
+index c5982c079eec..19a41fb4170c 100644
+--- a/src/ext/Bal/Bal.wixext.slnx
++++ b/src/ext/Bal/Bal.wixext.slnx
+@@ -9,10 +9,6 @@
+     <Platform Solution="*|Any CPU" Project="Win32" />
+   </Project>
+   <Project Path="stdbas/stdbas.vcxproj" Id="dbbf5f32-baea-46a8-99a0-17277a906456" />
+-  <Project Path="test/WixStdFnUnitTest/WixStdFnUnitTest.vcxproj" Id="9b507af9-035e-4db6-8c0c-5dcc3fef2631">
+-    <Platform Project="Win32" />
+-  </Project>
+-  <Project Path="test/WixToolsetTest.BootstrapperApplications/WixToolsetTest.BootstrapperApplications.csproj" />
+   <Project Path="wixext/WixToolset.BootstrapperApplications.wixext.csproj" />
+   <Project Path="wixiuiba/wixiuiba.vcxproj" Id="0f73e566-925c-448d-99cb-3a7f5df399c8" />
+   <Project Path="wixlib/bas.wixproj">
+@@ -23,4 +19,4 @@
+   <Project Path="wixstdba/wixstdba.vcxproj" Id="41085a22-e6aa-4e8b-ab1b-ddee0dc89dfa">
+     <Platform Solution="*|Any CPU" Project="Win32" />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/ComPlus/ComPlus.wixext.slnx b/src/ext/ComPlus/ComPlus.wixext.slnx
+index 3f1aa9bb7bd8..b1d9a084e309 100644
+--- a/src/ext/ComPlus/ComPlus.wixext.slnx
++++ b/src/ext/ComPlus/ComPlus.wixext.slnx
+@@ -6,11 +6,10 @@
+   <Project Path="ca/complusca.vcxproj" Id="bdef51ed-e242-4fa2-801a-01b127df851a">
+     <Platform Project="Win32" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.ComPlus/WixToolsetTest.ComPlus.csproj" />
+   <Project Path="wixext/WixToolset.ComPlus.wixext.csproj" />
+   <Project Path="wixlib/complus.wixproj">
+     <BuildDependency Project="ca/complusca.vcxproj" />
+     <Platform Project="x86" />
+     <Build />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/Dependency/Dependency.wixext.slnx b/src/ext/Dependency/Dependency.wixext.slnx
+index d6825d7c631d..2f0ab282bfab 100644
+--- a/src/ext/Dependency/Dependency.wixext.slnx
++++ b/src/ext/Dependency/Dependency.wixext.slnx
+@@ -6,10 +6,9 @@
+   <Project Path="ca/dependencyca.vcxproj" Id="b86af46c-0f90-49cc-923f-a800b088d015">
+     <Platform Project="Win32" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Dependency/WixToolsetTest.Dependency.csproj" />
+   <Project Path="wixext/WixToolset.Dependency.wixext.csproj" />
+   <Project Path="wixlib/dependency.wixproj">
+     <Platform Project="x86" />
+     <Build />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/DirectX/DirectX.wixext.slnx b/src/ext/DirectX/DirectX.wixext.slnx
+index f2cb74b22193..aaf9aa4f40ce 100644
+--- a/src/ext/DirectX/DirectX.wixext.slnx
++++ b/src/ext/DirectX/DirectX.wixext.slnx
+@@ -6,10 +6,9 @@
+   <Project Path="ca/directxca.vcxproj" Id="76542b28-0ffd-47d3-ad6a-d0f20fa875ac">
+     <Platform Project="Win32" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.DirectX/WixToolsetTest.DirectX.csproj" />
+   <Project Path="wixext/WixToolset.DirectX.wixext.csproj" />
+   <Project Path="wixlib/directx.wixproj">
+     <Platform Project="x86" />
+     <Build />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/Firewall/Firewall.wixext.slnx b/src/ext/Firewall/Firewall.wixext.slnx
+index 66c7dabcdaf1..a153899ffcf5 100644
+--- a/src/ext/Firewall/Firewall.wixext.slnx
++++ b/src/ext/Firewall/Firewall.wixext.slnx
+@@ -8,11 +8,10 @@
+     <Platform Project="Win32" />
+     <Build Solution="*|x64" Project="false" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Firewall/WixToolsetTest.Firewall.csproj" />
+   <Project Path="wixext/WixToolset.Firewall.wixext.csproj" />
+   <Project Path="wixlib/firewall.wixproj">
+     <Platform Project="x86" />
+     <Build Solution="*|Any CPU" />
+     <Build Solution="*|x86" />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/Http/Http.wixext.slnx b/src/ext/Http/Http.wixext.slnx
+index 57f8650257f7..d0125bf1d70c 100644
+--- a/src/ext/Http/Http.wixext.slnx
++++ b/src/ext/Http/Http.wixext.slnx
+@@ -6,10 +6,9 @@
+   <Project Path="ca/httpca.vcxproj" Id="90743805-c043-47c7-b5ff-8f5ee5c8a2de">
+     <Platform Project="Win32" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Http/WixToolsetTest.Http.csproj" />
+   <Project Path="wixext/WixToolset.Http.wixext.csproj" />
+   <Project Path="wixlib/http.wixproj">
+     <Platform Project="x86" />
+     <Build />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/Iis/Iis.wixext.slnx b/src/ext/Iis/Iis.wixext.slnx
+index 43f7f7fcd133..f445b71b452d 100644
+--- a/src/ext/Iis/Iis.wixext.slnx
++++ b/src/ext/Iis/Iis.wixext.slnx
+@@ -6,10 +6,9 @@
+   <Project Path="ca/iisca.vcxproj" Id="cb3fb8c4-14bf-4ea6-9f01-7fb258e5aef3">
+     <Platform Project="Win32" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Iis/WixToolsetTest.Iis.csproj" />
+   <Project Path="wixext/WixToolset.Iis.wixext.csproj" />
+   <Project Path="wixlib/iis.wixproj">
+     <Platform Project="x86" />
+     <Build />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/Msmq/Msmq.wixext.slnx b/src/ext/Msmq/Msmq.wixext.slnx
+index dfcbb6ff2c90..95de23adec98 100644
+--- a/src/ext/Msmq/Msmq.wixext.slnx
++++ b/src/ext/Msmq/Msmq.wixext.slnx
+@@ -6,10 +6,9 @@
+   <Project Path="ca/msmqca.vcxproj" Id="cad56a7e-342b-4324-9dcb-bceb8f3bc80d">
+     <Platform Project="Win32" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Msmq/WixToolsetTest.Msmq.csproj" />
+   <Project Path="wixext/WixToolset.Msmq.wixext.csproj" />
+   <Project Path="wixlib/msmq.wixproj">
+     <Platform Project="x86" />
+     <Build />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/NetFx/NetFx.wixext.slnx b/src/ext/NetFx/NetFx.wixext.slnx
+index 9c01b2ece4c3..f3868ac04981 100644
+--- a/src/ext/NetFx/NetFx.wixext.slnx
++++ b/src/ext/NetFx/NetFx.wixext.slnx
+@@ -13,11 +13,10 @@
+   <Project Path="netcoresearch/netcoresearch.vcxproj" Id="a7fd9ef2-68cf-4c8e-ad81-3e8a6c7e1937">
+     <Platform Solution="*|Any CPU" Project="Win32" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Netfx/WixToolsetTest.Netfx.csproj" />
+   <Project Path="wixext/WixToolset.Netfx.wixext.csproj" />
+   <Project Path="wixlib/netfx.wixproj">
+     <Platform Project="x86" />
+     <Build Solution="*|Any CPU" />
+     <Build Solution="*|x86" />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/PowerShell/PowerShell.wixext.slnx b/src/ext/PowerShell/PowerShell.wixext.slnx
+index 76dd22dfb0a6..fb14fbde2e75 100644
+--- a/src/ext/PowerShell/PowerShell.wixext.slnx
++++ b/src/ext/PowerShell/PowerShell.wixext.slnx
+@@ -4,11 +4,10 @@
+     <Platform Name="x64" />
+     <Platform Name="x86" />
+   </Configurations>
+-  <Project Path="test/WixToolsetTest.PowerShell/WixToolsetTest.PowerShell.csproj" />
+   <Project Path="wixext/WixToolset.PowerShell.wixext.csproj" />
+   <Project Path="wixlib/powershell.wixproj">
+     <Platform Project="x86" />
+     <Build Solution="*|Any CPU" />
+     <Build Solution="*|x86" />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/Sql/Sql.wixext.slnx b/src/ext/Sql/Sql.wixext.slnx
+index ec141cdbd83a..737f2a19adc6 100644
+--- a/src/ext/Sql/Sql.wixext.slnx
++++ b/src/ext/Sql/Sql.wixext.slnx
+@@ -6,10 +6,9 @@
+   <Project Path="ca/sqlca.vcxproj" Id="4dca6e4b-a1f1-4450-bc2d-94ac20f31935">
+     <Platform Project="Win32" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Sql/WixToolsetTest.Sql.csproj" />
+   <Project Path="wixext/WixToolset.Sql.wixext.csproj" />
+   <Project Path="wixlib/sql.wixproj">
+     <Platform Project="x86" />
+     <Build />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/UI/UI.wixext.slnx b/src/ext/UI/UI.wixext.slnx
+index 13296d3eeaf2..326c1d0172df 100644
+--- a/src/ext/UI/UI.wixext.slnx
++++ b/src/ext/UI/UI.wixext.slnx
+@@ -8,11 +8,10 @@
+     <Platform Project="Win32" />
+     <Build Solution="*|x64" Project="false" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.UI/WixToolsetTest.UI.csproj" />
+   <Project Path="wixext/WixToolset.UI.wixext.csproj" />
+   <Project Path="wixlib/ui.wixproj">
+     <Platform Project="x86" />
+     <Build Solution="*|Any CPU" />
+     <Build Solution="*|x86" />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/Util/Util.wixext.slnx b/src/ext/Util/Util.wixext.slnx
+index 737fba2790a0..f2d8eeea7213 100644
+--- a/src/ext/Util/Util.wixext.slnx
++++ b/src/ext/Util/Util.wixext.slnx
+@@ -12,11 +12,10 @@
+     <Platform Project="Win32" />
+     <Build Solution="*|x64" Project="false" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Util/WixToolsetTest.Util.csproj" />
+   <Project Path="wixext/WixToolset.Util.wixext.csproj" />
+   <Project Path="wixlib/util.wixproj">
+     <Platform Project="x86" />
+     <Build Solution="*|Any CPU" />
+     <Build Solution="*|x86" />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/ext/VisualStudio/VisualStudio.wixext.slnx b/src/ext/VisualStudio/VisualStudio.wixext.slnx
+index f66468a2d0c7..752117aac8d0 100644
+--- a/src/ext/VisualStudio/VisualStudio.wixext.slnx
++++ b/src/ext/VisualStudio/VisualStudio.wixext.slnx
+@@ -8,11 +8,10 @@
+     <Platform Project="Win32" />
+     <Build Solution="*|x64" Project="false" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.VisualStudio/WixToolsetTest.VisualStudio.csproj" />
+   <Project Path="wixext/WixToolset.VisualStudio.wixext.csproj" />
+   <Project Path="wixlib/vs.wixproj">
+     <Platform Project="x86" />
+     <Build Solution="*|Any CPU" />
+     <Build Solution="*|x86" />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/internal/internal.slnx b/src/internal/internal.slnx
+index 6b48850b86fc..2edb68f5d268 100644
+--- a/src/internal/internal.slnx
++++ b/src/internal/internal.slnx
+@@ -6,11 +6,4 @@
+     <Platform Name="x86" />
+   </Configurations>
+   <Project Path="WixInternal.BaseBuildTasks.Sources/WixInternal.BaseBuildTasks.Sources.csproj" />
+-  <Project Path="WixInternal.MSTestSupport/WixInternal.MSTestSupport.csproj" />
+-  <Project Path="WixInternal.TestSupport.Native/WixInternal.TestSupport.Native.vcxproj" Id="95babd97-fbdb-453a-af8a-fa031a07b599">
+-    <Platform Project="Win32" />
+-    <Build Solution="*|ARM64" Project="false" />
+-    <Build Solution="*|x64" Project="false" />
+-  </Project>
+-  <Project Path="WixInternal.TestSupport/WixInternal.TestSupport.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/libs/dutil/dutil.slnx b/src/libs/dutil/dutil.slnx
+index e4a94156fd50..7e0648000701 100644
+--- a/src/libs/dutil/dutil.slnx
++++ b/src/libs/dutil/dutil.slnx
+@@ -4,9 +4,5 @@
+     <Platform Name="x64" />
+     <Platform Name="x86" />
+   </Configurations>
+-  <Project Path="test/DUtilUnitTest/DUtilUnitTest.vcxproj" Id="ab7ee608-e5fb-42a5-831f-0deeea141223">
+-    <Platform Solution="*|ARM64" Project="x64" />
+-    <Build Solution="*|ARM64" Project="false" />
+-  </Project>
+   <Project Path="WixToolset.DUtil/dutil.vcxproj" Id="1244e671-f108-4334-ba52-8a7517f26ecd" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/libs/libs.slnx b/src/libs/libs.slnx
+index e0a1e0befe34..28408be3ff0c 100644
+--- a/src/libs/libs.slnx
++++ b/src/libs/libs.slnx
+@@ -5,20 +5,13 @@
+     <Platform Name="x64" />
+     <Platform Name="x86" />
+   </Configurations>
+-  <Project Path="dutil/test/DUtilUnitTest/DUtilUnitTest.vcxproj" Id="ab7ee608-e5fb-42a5-831f-0deeea141223">
+-    <Platform Project="Win32" />
+-    <Build Solution="*|Any CPU" Project="false" />
+-    <Build Solution="*|ARM64" Project="false" />
+-    <Build Solution="*|x64" Project="false" />
+-  </Project>
+   <Project Path="dutil/WixToolset.DUtil/dutil.vcxproj" Id="1244e671-f108-4334-ba52-8a7517f26ecd">
+     <Platform Solution="*|Any CPU" Project="Win32" />
+     <Build Solution="*|Any CPU" Project="false" />
+   </Project>
+-  <Project Path="test/WixToolsetTest.Versioning/WixToolsetTest.Versioning.csproj" />
+   <Project Path="wcautil/WixToolset.WcaUtil/wcautil.vcxproj" Id="5b3714b6-3a76-463e-8595-d48da276c512">
+     <Platform Solution="*|Any CPU" Project="Win32" />
+     <Build Solution="*|Any CPU" Project="false" />
+   </Project>
+   <Project Path="WixToolset.Versioning/WixToolset.Versioning.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/libs/wcautil/wcautil.slnx b/src/libs/wcautil/wcautil.slnx
+index fd8d2b16a58e..72ba9162122c 100644
+--- a/src/libs/wcautil/wcautil.slnx
++++ b/src/libs/wcautil/wcautil.slnx
+@@ -5,4 +5,4 @@
+     <Platform Name="x86" />
+   </Configurations>
+   <Project Path="WixToolset.WcaUtil/wcautil.vcxproj" Id="5b3714b6-3a76-463e-8595-d48da276c512" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/setup/setup.slnx b/src/setup/setup.slnx
+index 7f56128c0a53..f05d8555195b 100644
+--- a/src/setup/setup.slnx
++++ b/src/setup/setup.slnx
+@@ -4,4 +4,4 @@
+     <Platform Project="x64" />
+   </Project>
+   <Project Path="WixAdditionalTools/WixAdditionalTools.wixproj" Type="b7dd6f7e-def8-4e67-b5b7-07ef123db6f0" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/test/burn/BurnE2ETests.slnx b/src/test/burn/BurnE2ETests.slnx
+index 4bd447798adc..4c4b86ff1bcf 100644
+--- a/src/test/burn/BurnE2ETests.slnx
++++ b/src/test/burn/BurnE2ETests.slnx
+@@ -4,10 +4,5 @@
+     <Platform Name="x64" />
+     <Platform Name="x86" />
+   </Configurations>
+-  <Project Path="ForTestingUseOnlyExtension/ForTestingUseOnly.wixext.csproj" />
+-  <Project Path="TestBA/TestBA.csproj" />
+-  <Project Path="TestExe/TestExe.csproj" />
+-  <Project Path="WixTestTools/WixTestTools.csproj" />
+   <Project Path="WixToolset.WixBA/WixToolset.WixBA.csproj" />
+-  <Project Path="WixToolsetTest.BurnE2E/WixToolsetTest.BurnE2E.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/test/burn/TestData/WixIuiBaTests/DtfSamples.slnx b/src/test/burn/TestData/WixIuiBaTests/DtfSamples.slnx
+index be21997da3c5..884737df0652 100644
+--- a/src/test/burn/TestData/WixIuiBaTests/DtfSamples.slnx
++++ b/src/test/burn/TestData/WixIuiBaTests/DtfSamples.slnx
+@@ -3,4 +3,4 @@
+     <BuildType Project="Debug" />
+   </Project>
+   <Project Path="ManagedCA/ManagedCA.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/test/msi/MsiE2ETests.slnx b/src/test/msi/MsiE2ETests.slnx
+index c2cff8857ac5..041b2594fdb7 100644
+--- a/src/test/msi/MsiE2ETests.slnx
++++ b/src/test/msi/MsiE2ETests.slnx
+@@ -4,6 +4,4 @@
+     <Platform Name="x64" />
+     <Platform Name="x86" />
+   </Configurations>
+-  <Project Path="../burn/WixTestTools/WixTestTools.csproj" />
+-  <Project Path="WixToolsetTest.MsiE2E/WixToolsetTest.MsiE2E.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/test/msi/TestData/ComPlusExtensionTests/Components/ComPlusComponents.slnx b/src/test/msi/TestData/ComPlusExtensionTests/Components/ComPlusComponents.slnx
+index f29f1aa2223b..041b2594fdb7 100644
+--- a/src/test/msi/TestData/ComPlusExtensionTests/Components/ComPlusComponents.slnx
++++ b/src/test/msi/TestData/ComPlusExtensionTests/Components/ComPlusComponents.slnx
+@@ -4,8 +4,4 @@
+     <Platform Name="x64" />
+     <Platform Name="x86" />
+   </Configurations>
+-  <Project Path="TestComponentNative/TestComponentNative.vcxproj" Id="eb199fa2-f9f7-4a2f-a4d3-6689f8a18952" />
+-  <Project Path="TestComponentNET3/TestComponentNET3.csproj" Id="b4cd7ece-7245-445b-9f04-d2952631554d" />
+-  <Project Path="TestComponentNET4/TestComponentNET4.csproj" Id="ea2afcce-677d-433e-8517-4cfbbd3ebfaa" />
+-  <Project Path="TestComponentNET8/TestComponentNET8.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/test/wix/TestData/CsprojConsoleMultiFramework/CsprojConsoleMultiFramework.slnx b/src/test/wix/TestData/CsprojConsoleMultiFramework/CsprojConsoleMultiFramework.slnx
+index 1264db9c6f91..8ab359b49ae4 100644
+--- a/src/test/wix/TestData/CsprojConsoleMultiFramework/CsprojConsoleMultiFramework.slnx
++++ b/src/test/wix/TestData/CsprojConsoleMultiFramework/CsprojConsoleMultiFramework.slnx
+@@ -1,3 +1,3 @@
+ <Solution>
+   <Project Path="CsprojConsoleMultiFramework.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/test/wix/TestData/CsprojConsoleNetCore/CsprojConsoleNetCore.slnx b/src/test/wix/TestData/CsprojConsoleNetCore/CsprojConsoleNetCore.slnx
+index 93780d5249b2..61b6ca112807 100644
+--- a/src/test/wix/TestData/CsprojConsoleNetCore/CsprojConsoleNetCore.slnx
++++ b/src/test/wix/TestData/CsprojConsoleNetCore/CsprojConsoleNetCore.slnx
+@@ -1,3 +1,3 @@
+ <Solution>
+   <Project Path="CsprojConsoleNetCore.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/test/wix/TestData/TestProjects.slnx b/src/test/wix/TestData/TestProjects.slnx
+index 712bd148d1f9..4228e38492df 100644
+--- a/src/test/wix/TestData/TestProjects.slnx
++++ b/src/test/wix/TestData/TestProjects.slnx
+@@ -16,4 +16,4 @@
+   <Project Path="VcxprojDll/VcxprojDll.vcxproj" Id="2b70c248-1090-4d04-bda0-bf0e48716e5b" />
+   <Project Path="VcxprojStaticLib/VcxprojStaticLib.vcxproj" Id="c4bbeb93-e40f-4f91-9a9d-db9656db04f0" />
+   <Project Path="VcxprojWindowsApp/VcxprojWindowsApp.vcxproj" Id="8f2a12cd-6d3b-4648-81a9-2a852a63ea90" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/test/wix/WixE2ETests.slnx b/src/test/wix/WixE2ETests.slnx
+index 7a1020fc4149..fcaf712117eb 100644
+--- a/src/test/wix/WixE2ETests.slnx
++++ b/src/test/wix/WixE2ETests.slnx
+@@ -1,3 +1,3 @@
+ <Solution>
+   <Project Path="WixE2E/WixE2E.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/tools/tools.slnx b/src/tools/tools.slnx
+index 297f42d2e56a..b72e3939f331 100644
+--- a/src/tools/tools.slnx
++++ b/src/tools/tools.slnx
+@@ -8,4 +8,4 @@
+     <Platform Project="Win32" />
+   </Project>
+   <Project Path="WixToolset.Templates/WixToolset.Templates.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/wix/test/WixToolsetTest.Sdk/TestData/MultiCulturalMsiPackage/MultiCulturalMsiPackage.slnx b/src/wix/test/WixToolsetTest.Sdk/TestData/MultiCulturalMsiPackage/MultiCulturalMsiPackage.slnx
+index 6f667d8bc422..3d15a58bb3dc 100644
+--- a/src/wix/test/WixToolsetTest.Sdk/TestData/MultiCulturalMsiPackage/MultiCulturalMsiPackage.slnx
++++ b/src/wix/test/WixToolsetTest.Sdk/TestData/MultiCulturalMsiPackage/MultiCulturalMsiPackage.slnx
+@@ -6,4 +6,4 @@
+   <Project Path="MsiPackage/MsiPackage.wixproj">
+     <Build />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/wix/test/WixToolsetTest.Sdk/TestData/SimpleMsiPackage/SimpleMsiPackage.slnx b/src/wix/test/WixToolsetTest.Sdk/TestData/SimpleMsiPackage/SimpleMsiPackage.slnx
+index 84de8f9c8834..eeabe122bcd1 100644
+--- a/src/wix/test/WixToolsetTest.Sdk/TestData/SimpleMsiPackage/SimpleMsiPackage.slnx
++++ b/src/wix/test/WixToolsetTest.Sdk/TestData/SimpleMsiPackage/SimpleMsiPackage.slnx
+@@ -10,4 +10,4 @@
+     <Platform Project="x86" />
+     <Build Solution="*|x86" />
+   </Project>
+-</Solution>
++</Solution>
+\ No newline at end of file
+diff --git a/src/wix/wix.slnx b/src/wix/wix.slnx
+index 7ebb41e6b184..ee8f3daf1c1e 100644
+--- a/src/wix/wix.slnx
++++ b/src/wix/wix.slnx
+@@ -6,20 +6,9 @@
+     <Platform Name="x86" />
+   </Configurations>
+   <Folder Name="/test/">
+-    <Project Path="test/CompileCoreTestExtensionWixlib/CompileCoreTestExtensionWixlib.csproj" />
+-    <Project Path="test/Example.Extension/Example.Extension.csproj" />
+-    <Project Path="test/WixToolsetTest.BuildTasks/WixToolsetTest.BuildTasks.csproj" />
+-    <Project Path="test/WixToolsetTest.Converters.Symbolizer/WixToolsetTest.Converters.Symbolizer.csproj" />
+-    <Project Path="test/WixToolsetTest.Converters/WixToolsetTest.Converters.csproj" />
+-    <Project Path="test/WixToolsetTest.Core.Native/WixToolsetTest.Core.Native.csproj" />
+-    <Project Path="test/WixToolsetTest.Core/WixToolsetTest.Core.csproj" />
+-    <Project Path="test/WixToolsetTest.CoreIntegration/WixToolsetTest.CoreIntegration.csproj" />
+-    <Project Path="test/WixToolsetTest.Sdk/WixToolsetTest.Sdk.csproj" />
+   </Folder>
+   <Project Path="pack-wix/pack-wix.csproj" />
+   <Project Path="wix/wix.csproj" />
+-  <Project Path="WixInternal.Core.MSTestPackage/WixInternal.Core.MSTestPackage.csproj" />
+-  <Project Path="WixInternal.Core.TestPackage/WixInternal.Core.TestPackage.csproj" />
+   <Project Path="wixnative/wixnative.vcxproj" Id="8497ec72-b8d0-4272-a9d0-7e9d871cefbf">
+     <Platform Solution="Release|Any CPU" Project="Win32" />
+   </Project>
+@@ -32,4 +21,4 @@
+   <Project Path="WixToolset.Core.WindowsInstaller/WixToolset.Core.WindowsInstaller.csproj" />
+   <Project Path="WixToolset.Core/WixToolset.Core.csproj" />
+   <Project Path="WixToolset.Sdk/WixToolset.Sdk.csproj" />
+-</Solution>
++</Solution>
+\ No newline at end of file

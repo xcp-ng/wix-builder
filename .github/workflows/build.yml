@@ -31,8 +31,6 @@ jobs:
           path: wix-builder
       - name: Apply patches
         run: ./wix-builder/Apply-WixPatches.ps1
-      - name: Disable tests
-        run: ./wix-builder/Disable-WixTests.ps1
       - name: Reset version
         run: git tag ${{ env.WIX_VERSION }}
       - name: Build wix

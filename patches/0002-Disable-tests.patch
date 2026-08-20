@@ -1,18 +1,11 @@
-From 4590c348cb3fcf523b2da523491a1ae940ddd982 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Wed, 26 Nov 2025 13:06:59 +0100
 Subject: [PATCH] Disable tests
 
----
- src/api/api.cmd   |  8 --------
- src/build_all.cmd |  5 -----
- src/burn/burn.cmd |  5 -----
- src/libs/libs.cmd |  8 --------
- src/wix/wix.cmd   | 13 -------------
- 5 files changed, 39 deletions(-)
 
 diff --git a/src/api/api.cmd b/src/api/api.cmd
-index 42ca8567..113a10c1 100644
+index 42ca8567908d..113a10c1f6da 100644
 --- a/src/api/api.cmd
 +++ b/src/api/api.cmd
 @@ -25,14 +25,6 @@
@@ -31,7 +24,7 @@ index 42ca8567..113a10c1 100644
  
  :clean
 diff --git a/src/build_all.cmd b/src/build_all.cmd
-index 7e9e7790..76e2b167 100644
+index 7e9e779093e5..76e2b167908f 100644
 --- a/src/build_all.cmd
 +++ b/src/build_all.cmd
 @@ -59,11 +59,6 @@ call ext\ext.cmd %_C% || exit /b
@@ -47,7 +40,7 @@ index 7e9e7790..76e2b167 100644
  
  call internal\finalize.cmd %_C% || exit /b
 diff --git a/src/burn/burn.cmd b/src/burn/burn.cmd
-index 059c948c..daed54ed 100644
+index 059c948c8309..daed54ed0c19 100644
 --- a/src/burn/burn.cmd
 +++ b/src/burn/burn.cmd
 @@ -25,11 +25,6 @@ nuget restore || exit /b
@@ -63,7 +56,7 @@ index 059c948c..daed54ed 100644
  
  :clean
 diff --git a/src/libs/libs.cmd b/src/libs/libs.cmd
-index 97d2490b..ee297826 100644
+index 97d2490bc23f..ee2978261cf9 100644
 --- a/src/libs/libs.cmd
 +++ b/src/libs/libs.cmd
 @@ -21,14 +21,6 @@
@@ -82,7 +75,7 @@ index 97d2490b..ee297826 100644
  
  :clean
 diff --git a/src/wix/wix.cmd b/src/wix/wix.cmd
-index 7977c129..9af7f360 100644
+index 7977c1291e7c..9af7f3604116 100644
 --- a/src/wix/wix.cmd
 +++ b/src/wix/wix.cmd
 @@ -35,19 +35,6 @@ msbuild -t:Publish -p:Configuration=%_C% -tl -nologo -warnaserror WixToolset.Sdk

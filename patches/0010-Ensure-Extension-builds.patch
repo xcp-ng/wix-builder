@@ -1,0 +1,176 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Thu, 20 Aug 2026 19:52:43 +0200
+Subject: [PATCH] Ensure Extension builds
+
+
+diff --git a/src/ext/Bal/bal_t.proj b/src/ext/Bal/bal_t.proj
+index f54cd9484cde..31a9ab81164a 100644
+--- a/src/ext/Bal/bal_t.proj
++++ b/src/ext/Bal/bal_t.proj
+@@ -11,7 +11,9 @@
+ 
+ 
+     <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="NoBuild=true" Targets="PackNative" />
++ <ProjectReference Include="wixext\WixToolset.BootstrapperApplications.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.BootstrapperApplications.wixext.csproj" Properties="NoBuild=true" Targets="Pack" />
++ <ProjectReference Include="wixext-backward-compatible\WixToolset.Bal.wixext.csproj" />
+     <ProjectReference Include="wixext-backward-compatible\WixToolset.Bal.wixext.csproj" Targets="Pack" />
+ 
+ 
+diff --git a/src/ext/ComPlus/complus_t.proj b/src/ext/ComPlus/complus_t.proj
+index fce9d03e6395..5ad7c565f59f 100644
+--- a/src/ext/ComPlus/complus_t.proj
++++ b/src/ext/ComPlus/complus_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.ComPlus.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.ComPlus.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Dependency/dependency_t.proj b/src/ext/Dependency/dependency_t.proj
+index 3b04afb4c26a..9b95c727e9ad 100644
+--- a/src/ext/Dependency/dependency_t.proj
++++ b/src/ext/Dependency/dependency_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.Dependency.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Dependency.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/DirectX/directx_t.proj b/src/ext/DirectX/directx_t.proj
+index 676ebe95abfb..67ab0a0df73b 100644
+--- a/src/ext/DirectX/directx_t.proj
++++ b/src/ext/DirectX/directx_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.DirectX.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.DirectX.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Firewall/firewall_t.proj b/src/ext/Firewall/firewall_t.proj
+index 82ba12b4ef8f..808bf05db7a5 100644
+--- a/src/ext/Firewall/firewall_t.proj
++++ b/src/ext/Firewall/firewall_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.Firewall.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Firewall.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Http/http_t.proj b/src/ext/Http/http_t.proj
+index 8a6c0cc35561..39aafac8e9aa 100644
+--- a/src/ext/Http/http_t.proj
++++ b/src/ext/Http/http_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.Http.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Http.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Iis/iis_t.proj b/src/ext/Iis/iis_t.proj
+index 035f8e6c142b..7fb6524f0d49 100644
+--- a/src/ext/Iis/iis_t.proj
++++ b/src/ext/Iis/iis_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.Iis.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Iis.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Msmq/msmq_t.proj b/src/ext/Msmq/msmq_t.proj
+index 97cb45a176f3..e90db5f088b6 100644
+--- a/src/ext/Msmq/msmq_t.proj
++++ b/src/ext/Msmq/msmq_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.Msmq.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Msmq.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/NetFx/netfx_t.proj b/src/ext/NetFx/netfx_t.proj
+index 594ce32b1f1f..3c2167606538 100644
+--- a/src/ext/NetFx/netfx_t.proj
++++ b/src/ext/NetFx/netfx_t.proj
+@@ -4,6 +4,7 @@
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+     <ProjectReference Include="wixlib\netfx.wixproj" />
++ <ProjectReference Include="wixext\WixToolset.Netfx.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Netfx.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/PowerShell/powershell_t.proj b/src/ext/PowerShell/powershell_t.proj
+index 55424ddb2697..53d95f1941ba 100644
+--- a/src/ext/PowerShell/powershell_t.proj
++++ b/src/ext/PowerShell/powershell_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.PowerShell.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.PowerShell.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Sql/sql_t.proj b/src/ext/Sql/sql_t.proj
+index 3636088bdc71..0bfa989ee1b1 100644
+--- a/src/ext/Sql/sql_t.proj
++++ b/src/ext/Sql/sql_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.Sql.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Sql.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/UI/ui_t.proj b/src/ext/UI/ui_t.proj
+index 5ef7213e8553..e598ecea5d68 100644
+--- a/src/ext/UI/ui_t.proj
++++ b/src/ext/UI/ui_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.UI.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.UI.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Util/util_t.proj b/src/ext/Util/util_t.proj
+index 6ece532e5bcd..1076e489ace0 100644
+--- a/src/ext/Util/util_t.proj
++++ b/src/ext/Util/util_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.Util.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Util.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/VisualStudio/visualstudio_t.proj b/src/ext/VisualStudio/visualstudio_t.proj
+index 67297bdb22ba..832e1b2f12a7 100644
+--- a/src/ext/VisualStudio/visualstudio_t.proj
++++ b/src/ext/VisualStudio/visualstudio_t.proj
+@@ -3,6 +3,7 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
++ <ProjectReference Include="wixext\WixToolset.VisualStudio.wixext.csproj" />
+     <ProjectReference Include="wixext\WixToolset.VisualStudio.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 

@@ -1,17 +1,12 @@
-From a3a78e2ce998028cd6eacc2df69873b910f6e272 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Sat, 7 Mar 2026 16:48:51 +0100
 Subject: [PATCH] Build projects previously implied by tests
 
 Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
----
- src/api/burn/api_burn_t.proj | 2 +-
- src/ext/Bal/bal_t.proj       | 2 +-
- src/libs/dutil/dutil_t.proj  | 4 ++--
- 3 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/src/api/burn/api_burn_t.proj b/src/api/burn/api_burn_t.proj
-index aa1bc628..15ea6b59 100644
+index aa1bc628a630..15ea6b590524 100644
 --- a/src/api/burn/api_burn_t.proj
 +++ b/src/api/burn/api_burn_t.proj
 @@ -17,7 +17,7 @@
@@ -24,7 +19,7 @@ index aa1bc628..15ea6b59 100644
      <ProjectReference Include="bextutil\bextutil.vcxproj" Properties="Platform=ARM64" />
  
 diff --git a/src/ext/Bal/bal_t.proj b/src/ext/Bal/bal_t.proj
-index a7e4d569..3aed4b02 100644
+index a7e4d569a773..3aed4b0223dc 100644
 --- a/src/ext/Bal/bal_t.proj
 +++ b/src/ext/Bal/bal_t.proj
 @@ -6,7 +6,7 @@
@@ -37,7 +32,7 @@ index a7e4d569..3aed4b02 100644
      <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="Platform=ARM64" />
  
 diff --git a/src/libs/dutil/dutil_t.proj b/src/libs/dutil/dutil_t.proj
-index bd9ee7c8..a55adbab 100644
+index bd9ee7c87089..a55adbabf79b 100644
 --- a/src/libs/dutil/dutil_t.proj
 +++ b/src/libs/dutil/dutil_t.proj
 @@ -1,7 +1,7 @@

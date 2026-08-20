@@ -1,16 +1,12 @@
-From ef1e5fde6e94d5f74457d2f2d87071b4098a8ef3 Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
 Date: Sat, 7 Mar 2026 16:49:15 +0100
 Subject: [PATCH] Restore projects via msbuild
 
 Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
----
- src/burn/burn.cmd         | 2 +-
- src/internal/internal.cmd | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/burn/burn.cmd b/src/burn/burn.cmd
-index daed54ed..c931540d 100644
+index daed54ed0c19..c931540dd417 100644
 --- a/src/burn/burn.cmd
 +++ b/src/burn/burn.cmd
 @@ -21,7 +21,7 @@
@@ -23,7 +19,7 @@ index daed54ed..c931540d 100644
  msbuild burn_t.proj -p:Configuration=%_C% -tl -nologo -m -warnaserror -bl:%_L%\burn_build.binlog || exit /b
  
 diff --git a/src/internal/internal.cmd b/src/internal/internal.cmd
-index 40413f55..e4a2686e 100644
+index 40413f550daf..e4a2686e6ff3 100644
 --- a/src/internal/internal.cmd
 +++ b/src/internal/internal.cmd
 @@ -20,7 +20,7 @@

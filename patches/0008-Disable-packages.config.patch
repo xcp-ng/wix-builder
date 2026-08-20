@@ -1,0 +1,52 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Thu, 20 Aug 2026 19:52:42 +0200
+Subject: [PATCH] Disable packages.config
+
+
+diff --git a/src/internal/WixInternal.TestSupport.Native/packages.config b/src/internal/WixInternal.TestSupport.Native/packages.config
+deleted file mode 100644
+index ea16d09d973c..000000000000
+--- a/src/internal/WixInternal.TestSupport.Native/packages.config
++++ /dev/null
+@@ -1,16 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+-
+-<packages>
+-  <!--
+-    Update build\WixInternal.TestSupport.Native.props and build\WixInternal.TestSupport.Native.targets
+-    when any of these versions are updated.
+-  -->
+-  <package id="xunit.abstractions" version="2.0.3" />
+-  <package id="xunit.assert" version="2.9.3" />
+-  <package id="xunit.core" version="2.9.3" />
+-  <package id="xunit.extensibility.core" version="2.9.3" />
+-  <package id="xunit.extensibility.execution" version="2.9.3" />
+-  <package id="xunit.runner.msbuild" version="2.9.3" />
+-  <package id="xunit.runner.visualstudio" version="2.8.2" />
+-</packages>
+diff --git a/src/test/wix/TestData/CsprojWebApplicationNetFx/packages.config b/src/test/wix/TestData/CsprojWebApplicationNetFx/packages.config
+deleted file mode 100644
+index 40f85c9ef161..000000000000
+--- a/src/test/wix/TestData/CsprojWebApplicationNetFx/packages.config
++++ /dev/null
+@@ -1,17 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="Antlr" version="3.5.0.2" targetFramework="net472" />
+-  <package id="bootstrap" version="3.4.1" targetFramework="net472" />
+-  <package id="jQuery" version="3.4.1" targetFramework="net472" />
+-  <package id="jQuery.Validation" version="1.17.0" targetFramework="net472" />
+-  <package id="Microsoft.AspNet.Mvc" version="5.2.7" targetFramework="net472" />
+-  <package id="Microsoft.AspNet.Razor" version="3.2.7" targetFramework="net472" />
+-  <package id="Microsoft.AspNet.Web.Optimization" version="1.1.3" targetFramework="net472" />
+-  <package id="Microsoft.AspNet.WebPages" version="3.2.7" targetFramework="net472" />
+-  <package id="Microsoft.CodeDom.Providers.DotNetCompilerPlatform" version="2.0.1" targetFramework="net472" />
+-  <package id="Microsoft.jQuery.Unobtrusive.Validation" version="3.2.11" targetFramework="net472" />
+-  <package id="Microsoft.Web.Infrastructure" version="1.0.0.0" targetFramework="net472" />
+-  <package id="Modernizr" version="2.8.3" targetFramework="net472" />
+-  <package id="Newtonsoft.Json" version="12.0.2" targetFramework="net472" />
+-  <package id="WebGrease" version="1.6.0" targetFramework="net472" />
+-</packages>
+\ No newline at end of file

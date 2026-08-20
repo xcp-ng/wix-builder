@@ -1,0 +1,298 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Thu, 20 Aug 2026 19:52:42 +0200
+Subject: [PATCH] Prune Traversal projects
+
+
+diff --git a/src/api/burn/api_burn_t.proj b/src/api/burn/api_burn_t.proj
+index 15ea6b590524..4140bd72b33a 100644
+--- a/src/api/burn/api_burn_t.proj
++++ b/src/api/burn/api_burn_t.proj
+@@ -4,15 +4,10 @@
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+     <!-- Restore: Explicitly restore the test projects, which need some hand-holding. -->
+-    <ProjectReference Include="test\BalUtilUnitTest\BalUtilUnitTest.vcxproj" Targets="Restore" BuildInParallel="false" />
+-    <ProjectReference Include="test\BextUtilUnitTest\BextUtilUnitTest.vcxproj" Targets="Restore" BuildInParallel="false" />
+ 
+     <!-- C++/CLI projects will try to build their dependent projects in parallel with others, so they must be built first. -->
+-    <ProjectReference Include="test\BalUtilUnitTest\BalUtilUnitTest.vcxproj" Properties="Platform=x86" BuildInParallel="false" />
+-    <ProjectReference Include="test\BextUtilUnitTest\BextUtilUnitTest.vcxproj" Properties="Platform=x86" BuildInParallel="false" />
+ 
+     <!-- Make sure that if these rebuild balutil due to the inability for incremental build, then all shipped code uses the same binaries. -->
+-    <ProjectReference Include="test\WixToolsetTest.BootstrapperApplicationApi\WixToolsetTest.BootstrapperApplicationApi.csproj" Properties="Platform=AnyCPU" BuildInParallel="false" />
+     <ProjectReference Include="WixToolset.BootstrapperApplicationApi\WixToolset.BootstrapperApplicationApi.csproj" Properties="Platform=AnyCPU" BuildInParallel="false" />
+ 
+     <!-- Build -->
+diff --git a/src/api/wix/api_wix_t.proj b/src/api/wix/api_wix_t.proj
+index aafb85fa6029..ba7dcb625926 100644
+--- a/src/api/wix/api_wix_t.proj
++++ b/src/api/wix/api_wix_t.proj
+@@ -2,6 +2,5 @@
+   <ItemGroup>
+     <ProjectReference Include="WixToolset.Data\WixToolset.Data.csproj" Targets="Pack" />
+     <ProjectReference Include="WixToolset.Extensibility\WixToolset.Extensibility.csproj" Targets="Pack" />
+-    <ProjectReference Include="test\WixToolsetTest.Data\WixToolsetTest.Data.csproj" />
+   </ItemGroup>
+ </Project>
+diff --git a/src/burn/burn_t.proj b/src/burn/burn_t.proj
+index adf1ce1eb86c..eec3a596cfdb 100644
+--- a/src/burn/burn_t.proj
++++ b/src/burn/burn_t.proj
+@@ -1,7 +1,5 @@
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\BurnUnitTest\BurnUnitTest.vcxproj" Properties="Platform=x64" BuildInParallel="false" />
+-    <ProjectReference Include="test\BurnUnitTest\BurnUnitTest.vcxproj" Properties="Platform=x86" BuildInParallel="false" />
+ 
+     <ProjectReference Include="stub\stub.vcxproj" Properties="Platform=x86" />
+     <ProjectReference Include="stub\stub.vcxproj" Properties="Platform=x64" />
+diff --git a/src/ext/Bal/bal_t.proj b/src/ext/Bal/bal_t.proj
+index 3aed4b0223dc..f54cd9484cde 100644
+--- a/src/ext/Bal/bal_t.proj
++++ b/src/ext/Bal/bal_t.proj
+@@ -4,25 +4,21 @@
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+     <!-- C++/CLI projects will try to build their dependent projects in parallel with others, so they must be built first. -->
+-    <ProjectReference Include="test\WixStdFnUnitTest\WixStdFnUnitTest.vcxproj" Properties="Platform=x86" BuildInParallel="false" />
+ 
+     <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="Platform=x86" />
+     <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="Platform=x64" />
+     <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="Platform=ARM64" />
+ 
+-    <ProjectReference Include="test\WixToolsetTest.BootstrapperApplications\WixToolsetTest.BootstrapperApplications.csproj" />
+ 
+     <ProjectReference Include="wixstdfn\wixstdfn.vcxproj" Properties="NoBuild=true" Targets="PackNative" />
+     <ProjectReference Include="wixext\WixToolset.BootstrapperApplications.wixext.csproj" Properties="NoBuild=true" Targets="Pack" />
+     <ProjectReference Include="wixext-backward-compatible\WixToolset.Bal.wixext.csproj" Targets="Pack" />
+ 
+-    <ProjectReference Include="test\examples\examples.proj" />
+ 
+     <!-- 
+     Currently there are no unskipped unit tests in this project. Should that change,
+     we'll need to update the native test framework or figure out something else.
+ 
+-    <ProjectReference Include="ext\Bal\test\WixStdFnUnitTest\WixStdFnUnitTest.vcxproj" /> 
+     -->
+   </ItemGroup>
+ 
+diff --git a/src/ext/ComPlus/complus_t.proj b/src/ext/ComPlus/complus_t.proj
+index 56f0cc99c710..fce9d03e6395 100644
+--- a/src/ext/ComPlus/complus_t.proj
++++ b/src/ext/ComPlus/complus_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.ComPlus\WixToolsetTest.ComPlus.csproj" />
+     <ProjectReference Include="wixext\WixToolset.ComPlus.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Dependency/dependency_t.proj b/src/ext/Dependency/dependency_t.proj
+index c4293806df76..3b04afb4c26a 100644
+--- a/src/ext/Dependency/dependency_t.proj
++++ b/src/ext/Dependency/dependency_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.Dependency\WixToolsetTest.Dependency.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Dependency.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/DirectX/directx_t.proj b/src/ext/DirectX/directx_t.proj
+index ff28ccb757b0..676ebe95abfb 100644
+--- a/src/ext/DirectX/directx_t.proj
++++ b/src/ext/DirectX/directx_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.DirectX\WixToolsetTest.DirectX.csproj" />
+     <ProjectReference Include="wixext\WixToolset.DirectX.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Firewall/firewall_t.proj b/src/ext/Firewall/firewall_t.proj
+index f2cee0a0190a..82ba12b4ef8f 100644
+--- a/src/ext/Firewall/firewall_t.proj
++++ b/src/ext/Firewall/firewall_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.Firewall\WixToolsetTest.Firewall.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Firewall.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Http/http_t.proj b/src/ext/Http/http_t.proj
+index b3de433ff578..8a6c0cc35561 100644
+--- a/src/ext/Http/http_t.proj
++++ b/src/ext/Http/http_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.Http\WixToolsetTest.Http.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Http.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Iis/iis_t.proj b/src/ext/Iis/iis_t.proj
+index 2e05f3f18775..035f8e6c142b 100644
+--- a/src/ext/Iis/iis_t.proj
++++ b/src/ext/Iis/iis_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.Iis\WixToolsetTest.Iis.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Iis.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Msmq/msmq_t.proj b/src/ext/Msmq/msmq_t.proj
+index 639f7f779be1..97cb45a176f3 100644
+--- a/src/ext/Msmq/msmq_t.proj
++++ b/src/ext/Msmq/msmq_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.Msmq\WixToolsetTest.Msmq.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Msmq.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/NetFx/netfx_t.proj b/src/ext/NetFx/netfx_t.proj
+index 86996e42e60b..594ce32b1f1f 100644
+--- a/src/ext/NetFx/netfx_t.proj
++++ b/src/ext/NetFx/netfx_t.proj
+@@ -4,7 +4,6 @@
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+     <ProjectReference Include="wixlib\netfx.wixproj" />
+-    <ProjectReference Include="test\WixToolsetTest.Netfx\WixToolsetTest.Netfx.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Netfx.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/PowerShell/powershell_t.proj b/src/ext/PowerShell/powershell_t.proj
+index 8c12bdef0178..55424ddb2697 100644
+--- a/src/ext/PowerShell/powershell_t.proj
++++ b/src/ext/PowerShell/powershell_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.PowerShell\WixToolsetTest.Powershell.csproj" />
+     <ProjectReference Include="wixext\WixToolset.PowerShell.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Sql/sql_t.proj b/src/ext/Sql/sql_t.proj
+index 424505102e2b..3636088bdc71 100644
+--- a/src/ext/Sql/sql_t.proj
++++ b/src/ext/Sql/sql_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.Sql\WixToolsetTest.Sql.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Sql.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/UI/ui_t.proj b/src/ext/UI/ui_t.proj
+index 895c0323f610..5ef7213e8553 100644
+--- a/src/ext/UI/ui_t.proj
++++ b/src/ext/UI/ui_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.UI\WixToolsetTest.UI.csproj" />
+     <ProjectReference Include="wixext\WixToolset.UI.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/Util/util_t.proj b/src/ext/Util/util_t.proj
+index 02be4b49f0b3..6ece532e5bcd 100644
+--- a/src/ext/Util/util_t.proj
++++ b/src/ext/Util/util_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.Util\WixToolsetTest.Util.csproj" />
+     <ProjectReference Include="wixext\WixToolset.Util.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/VisualStudio/visualstudio_t.proj b/src/ext/VisualStudio/visualstudio_t.proj
+index d6c101e62bcc..67297bdb22ba 100644
+--- a/src/ext/VisualStudio/visualstudio_t.proj
++++ b/src/ext/VisualStudio/visualstudio_t.proj
+@@ -3,7 +3,6 @@
+ 
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+-    <ProjectReference Include="test\WixToolsetTest.VisualStudio\WixToolsetTest.VisualStudio.csproj" />
+     <ProjectReference Include="wixext\WixToolset.VisualStudio.wixext.csproj" Targets="Pack" Properties="NoBuild=true" />
+   </ItemGroup>
+ 
+diff --git a/src/ext/ext_t.proj b/src/ext/ext_t.proj
+index f9febb2e1d1c..d306d35a7e7d 100644
+--- a/src/ext/ext_t.proj
++++ b/src/ext/ext_t.proj
+@@ -20,20 +20,6 @@
+     <ProjectReference Include="Sql\sql_t.proj" Targets="Restore;Build" />
+     <ProjectReference Include="VisualStudio\visualstudio_t.proj" Targets="Restore;Build" />
+ 
+-    <ProjectReference Include="Firewall\firewall_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="UI\ui_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="Util\util_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="Bal\bal_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="ComPlus\complus_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="Dependency\dependency_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="DirectX\directx_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="Http\http_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="Iis\iis_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="Msmq\msmq_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="NetFx\netfx_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="PowerShell\powershell_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="Sql\sql_t.proj" Targets="WixTest" />
+-    <ProjectReference Include="VisualStudio\visualstudio_t.proj" Targets="WixTest" />
+ 
+   </ItemGroup>
+ </Project>
+diff --git a/src/internal/internal_t.proj b/src/internal/internal_t.proj
+index ab96b6c84845..78eeb9c4db02 100644
+--- a/src/internal/internal_t.proj
++++ b/src/internal/internal_t.proj
+@@ -1,9 +1,5 @@
+ <Project Sdk="Microsoft.Build.Traversal">
+   <ItemGroup>
+     <ProjectReference Include="WixInternal.BaseBuildTasks.Sources\WixInternal.BaseBuildTasks.Sources.csproj" Targets="Pack" />
+-    <ProjectReference Include="WixInternal.TestSupport\WixInternal.TestSupport.csproj" Targets="Pack" />
+-    <ProjectReference Include="WixInternal.MSTestSupport\WixInternal.MSTestSupport.csproj" Targets="Pack" />
+-    <ProjectReference Include="WixInternal.TestSupport.Native\WixInternal.TestSupport.Native.vcxproj" Properties="Platform=x86" />
+-    <ProjectReference Include="WixInternal.TestSupport.Native\WixInternal.TestSupport.Native.vcxproj" Properties="Platform=x64" />
+   </ItemGroup>
+ </Project>
+diff --git a/src/libs/libs_t.proj b/src/libs/libs_t.proj
+index 5c23cbf7041a..ca0fc88d57a0 100644
+--- a/src/libs/libs_t.proj
++++ b/src/libs/libs_t.proj
+@@ -3,6 +3,5 @@
+     <ProjectReference Include="dutil\dutil_t.proj" />
+     <ProjectReference Include="wcautil\wcautil_t.proj" />
+     <ProjectReference Include="WixToolset.Versioning\WixToolset.Versioning.csproj" Targets="Pack" />
+-    <ProjectReference Include="test\WixToolsetTest.Versioning\WixToolsetTest.Versioning.csproj" />
+   </ItemGroup>
+ </Project>
+diff --git a/src/wix/pack_t.proj b/src/wix/pack_t.proj
+index 7090f19b71db..3d87036ae261 100644
+--- a/src/wix/pack_t.proj
++++ b/src/wix/pack_t.proj
+@@ -7,8 +7,6 @@
+     <ProjectReference Include="WixToolset.Core\WixToolset.Core.csproj" Properties="NoBuild=true" Targets="Pack" />
+     <ProjectReference Include="WixToolset.Core.Burn\WixToolset.Core.Burn.csproj" Properties="NoBuild=true" Targets="Pack" />
+     <ProjectReference Include="WixToolset.Core.ExtensionCache\WixToolset.Core.ExtensionCache.csproj" Properties="NoBuild=true" Targets="Pack" />
+-    <ProjectReference Include="WixInternal.Core.TestPackage\WixInternal.Core.TestPackage.csproj" Properties="NoBuild=true" Targets="Pack" />
+-    <ProjectReference Include="WixInternal.Core.MSTestPackage\WixInternal.Core.MSTestPackage.csproj" Properties="NoBuild=true" Targets="Pack" />
+     <ProjectReference Include="WixToolset.Core.WindowsInstaller\WixToolset.Core.WindowsInstaller.csproj" Properties="NoBuild=true" Targets="Pack" />
+ 
+     <ProjectReference Include="WixToolset.Converters\WixToolset.Converters.csproj" Properties="NoBuild=true" Targets="Pack" />
