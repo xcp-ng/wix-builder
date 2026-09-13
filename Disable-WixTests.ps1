@@ -27,7 +27,7 @@ foreach ($file in $traversalFiles) {
     Set-Content $file.FullName $newContent
     Write-Host "  - Processed: $($file.FullName)"
 }
-git commit -a -m "Prune Traversal projects"
+git commit --date "1787248363 +0200" -a -m "[DWT] Prune Traversal projects"
 if ($LASTEXITCODE -ne 0) {
     throw "git commit exited with code $LASTEXITCODE"
 }
@@ -49,7 +49,7 @@ foreach ($file in $slnxFiles) {
     $xml.Save($file.FullName)
     Write-Host "  - Processed: $($file.FullName) ($($testProjects.Count) test projects removed)"
 }
-git commit -a -m "Prune slnx files"
+git commit --date "1787248363 +0200" -a -m "[DWT] Prune slnx files"
 if ($LASTEXITCODE -ne 0) {
     throw "git commit exited with code $LASTEXITCODE"
 }
@@ -63,7 +63,7 @@ foreach ($file in $packageConfigs) {
         Write-Host "  - Deleted: $($file.FullName)"
     }
 }
-git commit -a -m "Disable packages.config"
+git commit --date "1787248363 +0200" -a -m "[DWT] Disable packages.config"
 if ($LASTEXITCODE -ne 0) {
     throw "git commit exited with code $LASTEXITCODE"
 }
@@ -78,7 +78,7 @@ foreach ($file in $cmdFiles) {
     Set-Content $file.FullName $newContent
     Write-Host "  - Processed: $($file.FullName)"
 }
-git commit -a -m "Remove -warnaserror"
+git commit --date "1787248363 +0200" -a -m "[DWT] Remove -warnaserror"
 if ($LASTEXITCODE -ne 0) {
     throw "git commit exited with code $LASTEXITCODE"
 }
@@ -115,7 +115,7 @@ foreach ($file in $extTraversalFiles) {
     Set-Content $file.FullName $newLines
     Write-Host "  - Processed: $($file.FullName)"
 }
-git commit -a -m "Ensure Extension builds"
+git commit --date "1787248363 +0200" -a -m "[DWT] Ensure Extension builds"
 if ($LASTEXITCODE -ne 0) {
     throw "git commit exited with code $LASTEXITCODE"
 }
