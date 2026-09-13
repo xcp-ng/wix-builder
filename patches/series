@@ -4,8 +4,10 @@
 0003-Build-projects-previously-implied-by-tests.patch
 0004-Restore-projects-via-msbuild.patch
 0005-Add-build-location-hack-for-burn.patch
-0006-Prune-Traversal-projects.patch
-0007-Prune-slnx-files.patch
-0008-Disable-packages.config.patch
-0009-Remove-warnaserror.patch
-0010-Ensure-Extension-builds.patch
+0006-Report-ActionText-in-WelcomeDlg.patch
+0007-Report-ActionData-in-ProgressDlg.patch
+0008-DWT-Prune-Traversal-projects.patch
+0009-DWT-Prune-slnx-files.patch
+0010-DWT-Disable-packages.config.patch
+0011-DWT-Remove-warnaserror.patch
+0012-DWT-Ensure-Extension-builds.patch

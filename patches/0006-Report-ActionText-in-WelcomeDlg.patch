@@ -1,0 +1,21 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Sun, 13 Sep 2026 15:31:32 +0200
+Subject: [PATCH] Report ActionText in WelcomeDlg
+
+Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
+
+diff --git a/src/ext/UI/wixlib/WelcomeDlg.wxs b/src/ext/UI/wixlib/WelcomeDlg.wxs
+index 1cafaf0e011c..dd7343eb8ac7 100644
+--- a/src/ext/UI/wixlib/WelcomeDlg.wxs
++++ b/src/ext/UI/wixlib/WelcomeDlg.wxs
+@@ -16,6 +16,9 @@
+                 <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="373" Height="0" />
+                 <Control Id="Description" Type="Text" X="135" Y="80" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.WelcomeDlgDescription)" ShowCondition="NOT Installed OR NOT PATCH" HideCondition="Installed AND PATCH" />
+                 <Control Id="PatchDescription" Type="Text" X="135" Y="80" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.WelcomeUpdateDlgDescriptionUpdate)" ShowCondition="Installed AND PATCH" HideCondition="NOT Installed OR NOT PATCH" />
++                <Control Id="ActionText" Type="Text" X="135" Y="145" Width="220" Height="10" Transparent="yes" NoPrefix="yes">
++                    <Subscribe Event="ActionText" Attribute="Text" />
++                </Control>
+                 <Control Id="Title" Type="Text" X="135" Y="20" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.WelcomeDlgTitle)" />
+             </Dialog>
+ 

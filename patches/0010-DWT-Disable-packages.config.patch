@@ -1,7 +1,7 @@
 From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Tu Dinh <ngoc-tu.dinh@vates.tech>
-Date: Thu, 20 Aug 2026 19:52:42 +0200
-Subject: [PATCH] Disable packages.config
+Date: Thu, 20 Aug 2026 19:52:43 +0200
+Subject: [PATCH] [DWT] Disable packages.config
 
 
 diff --git a/src/internal/WixInternal.TestSupport.Native/packages.config b/src/internal/WixInternal.TestSupport.Native/packages.config
