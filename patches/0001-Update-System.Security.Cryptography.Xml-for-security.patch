@@ -1,0 +1,19 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Rob Mensching <rob@firegiant.com>
+Date: Wed, 20 May 2026 09:38:24 -0700
+Subject: [PATCH] Update System.Security.Cryptography.Xml for security fix
+
+(cherry picked from commit a47e82d4a6437d00f2cfa89311ee97b4924055a6)
+
+diff --git a/src/internal/SetBuildNumber/Directory.Packages.props.pp b/src/internal/SetBuildNumber/Directory.Packages.props.pp
+index b18342507aa4..cf390dd1f25b 100644
+--- a/src/internal/SetBuildNumber/Directory.Packages.props.pp
++++ b/src/internal/SetBuildNumber/Directory.Packages.props.pp
+@@ -53,6 +53,7 @@
+     <PackageVersion Include="System.DirectoryServices.AccountManagement" Version="8.0.0" />
+     <PackageVersion Include="System.Management" Version="8.0.0" />
+     <PackageVersion Include="System.Reflection.Metadata" Version="8.0.0" />
++    <PackageVersion Include="System.Security.Cryptography.Xml" Version="8.0.3" />
+     <PackageVersion Include="System.Text.Encoding.CodePages" Version="8.0.0" />
+     <PackageVersion Include="System.Text.Json" Version="8.0.6" />
+ 
