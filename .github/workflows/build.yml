@@ -47,7 +47,7 @@ jobs:
           }
       - name: Generate SBOM
         run: |
-          & "$Env:RUNNER_TEMP/tools/sbom.exe" generate -b build/artifacts/ -bc . -pn wix -ps ${{ env.VENDOR_NAME }} -pv ${{ env.WIX_VERSION }}
+          & "$Env:RUNNER_TEMP/tools/sbom.exe" generate -b build/artifacts/ -bc . -pn wix -ps ${{ env.VENDOR_NAME }} -pv ${{ env.WIX_VERSION }} -V error
           if ($LASTEXITCODE -ne 0) {
             throw "sbom-tool failed with exit code $LASTEXITCODE"
           }
