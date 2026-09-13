@@ -1,0 +1,20 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+Date: Sun, 13 Sep 2026 16:18:40 +0200
+Subject: [PATCH] Update System.Security.Cryptography.Xml 8.0.4
+
+Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
+
+diff --git a/src/internal/SetBuildNumber/Directory.Packages.props.pp b/src/internal/SetBuildNumber/Directory.Packages.props.pp
+index 7f269a258479..4235816eb8d3 100644
+--- a/src/internal/SetBuildNumber/Directory.Packages.props.pp
++++ b/src/internal/SetBuildNumber/Directory.Packages.props.pp
+@@ -53,7 +53,7 @@
+     <PackageVersion Include="System.DirectoryServices.AccountManagement" Version="8.0.0" />
+     <PackageVersion Include="System.Management" Version="8.0.0" />
+     <PackageVersion Include="System.Reflection.Metadata" Version="8.0.0" />
+-    <PackageVersion Include="System.Security.Cryptography.Xml" Version="8.0.3" />
++    <PackageVersion Include="System.Security.Cryptography.Xml" Version="8.0.4" />
+     <PackageVersion Include="System.Text.Encoding.CodePages" Version="8.0.0" />
+     <PackageVersion Include="System.Text.Json" Version="8.0.6" />
+ 

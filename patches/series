@@ -15,10 +15,11 @@
 0008-Add-build-location-hack-for-burn.patch
 0009-Report-ActionText-in-WelcomeDlg.patch
 0010-Report-ActionData-in-ProgressDlg.patch
+0011-Update-System.Security.Cryptography.Xml-8.0.4.patch
 
 # DWT
-0011-DWT-Prune-Traversal-projects.patch
-0012-DWT-Prune-slnx-files.patch
-0013-DWT-Disable-packages.config.patch
-0014-DWT-Remove-warnaserror.patch
-0015-DWT-Ensure-Extension-builds.patch
+0012-DWT-Prune-Traversal-projects.patch
+0013-DWT-Prune-slnx-files.patch
+0014-DWT-Disable-packages.config.patch
+0015-DWT-Remove-warnaserror.patch
+0016-DWT-Ensure-Extension-builds.patch
