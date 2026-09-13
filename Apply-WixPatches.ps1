@@ -1,9 +1,10 @@
 $ErrorActionPreference = 'Stop'
 $patches = Get-Content .\wix-builder\patches\series | Where-Object { $_ -and $_ -notlike "#*" }
 $patches | ForEach-Object {
-    Write-Host "Applying $_"
-    git apply .\wix-builder\patches\$_
+    $Env:GIT_COMMITTER_NAME = "wix-builder"
+    $Env:GIT_COMMITTER_EMAIL = "wix-builder@invalid.invalid"
+    git am .\wix-builder\patches\$_
     if ($LASTEXITCODE -ne 0) {
-        throw "git apply failed with exit code $LASTEXITCODE"
+        throw "git am failed with exit code $LASTEXITCODE"
     }
 }
