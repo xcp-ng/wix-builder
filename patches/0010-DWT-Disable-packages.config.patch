@@ -28,7 +28,7 @@ index ea16d09d973c..000000000000
 -</packages>
 diff --git a/src/test/wix/TestData/CsprojWebApplicationNetFx/packages.config b/src/test/wix/TestData/CsprojWebApplicationNetFx/packages.config
 deleted file mode 100644
-index 40f85c9ef161..000000000000
+index 273a4e8610d8..000000000000
 --- a/src/test/wix/TestData/CsprojWebApplicationNetFx/packages.config
 +++ /dev/null
 @@ -1,17 +0,0 @@
@@ -46,7 +46,7 @@ index 40f85c9ef161..000000000000
 -  <package id="Microsoft.jQuery.Unobtrusive.Validation" version="3.2.11" targetFramework="net472" />
 -  <package id="Microsoft.Web.Infrastructure" version="1.0.0.0" targetFramework="net472" />
 -  <package id="Modernizr" version="2.8.3" targetFramework="net472" />
--  <package id="Newtonsoft.Json" version="12.0.2" targetFramework="net472" />
+-  <package id="Newtonsoft.Json" version="13.0.4" targetFramework="net472" />
 -  <package id="WebGrease" version="1.6.0" targetFramework="net472" />
 -</packages>
 \ No newline at end of file

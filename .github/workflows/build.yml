@@ -10,8 +10,8 @@ env:
   NUGET_XMLDOC_MODE: skip
   VENDOR_NAME: XCP-ng
   WIX_REPO: xcp-ng/wix
-  WIX_REVISION: b8977d6f88e7b68e000bac226a2814f236770570 # v7.0.0
-  WIX_VERSION: v7.0.1-xcpng.1
+  WIX_REVISION: 642f1a0f7c857ffa4fc9fa3f9d1433aab895dd29 # v7.0.1
+  WIX_VERSION: v7.0.2-xcpng.1
 
 jobs:
   build:
@@ -53,7 +53,7 @@ jobs:
           }
       - name: Save build
         id: upload
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: wix
           path: build/artifacts/

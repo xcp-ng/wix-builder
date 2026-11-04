@@ -327,7 +327,7 @@ index b59415a9b819..bba25b839848 100644
      <copyright>$copyright$</copyright>
      <projectUrl>$projectUrl$</projectUrl>
 diff --git a/src/wix/WixToolset.Sdk/tools/wix.targets b/src/wix/WixToolset.Sdk/tools/wix.targets
-index 88317edc3bf1..30f6f5a52887 100644
+index 4ae809fcd0ff..30d14033a32d 100644
 --- a/src/wix/WixToolset.Sdk/tools/wix.targets
 +++ b/src/wix/WixToolset.Sdk/tools/wix.targets
 @@ -43,7 +43,6 @@
@@ -338,7 +338,7 @@ index 88317edc3bf1..30f6f5a52887 100644
    <UsingTask TaskName="WindowsInstallerValidation" AssemblyFile="$(WixTasksPath)" />
  
    <!--
-@@ -189,39 +188,6 @@
+@@ -194,39 +193,6 @@
      ***********************************************************************************************
      -->
  
@@ -378,7 +378,7 @@ index 88317edc3bf1..30f6f5a52887 100644
    <!--
      ***********************************************************************************************
      ***********************************************************************************************
-@@ -256,7 +222,6 @@
+@@ -261,7 +227,6 @@
      -->
    <PropertyGroup>
      <PrepareForBuildDependsOn>
